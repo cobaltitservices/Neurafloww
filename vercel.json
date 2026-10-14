@@ -1,0 +1,55 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/api/v1/stats",
+      "destination": "/api/v1/stats.json"
+    },
+    {
+      "source": "/api/v1/jobs",
+      "destination": "/api/v1/jobs.json"
+    },
+    {
+      "source": "/api/v1/backtest/results",
+      "destination": "/api/v1/backtest_results.json"
+    },
+    {
+      "source": "/api/v1/paper-trading/status",
+      "destination": "/api/v1/paper_trading.json"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, OPTIONS"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    }
+  ]
+}

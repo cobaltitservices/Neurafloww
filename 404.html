@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Route Not Found | Flow Tester Pro</title>
+    
+    <!-- SEO & Metadata -->
+    <meta name="description" content="404 Page Not Found. The requested endpoint or model resource does not exist on the Flow Tester Pro quantitative terminal cluster.">
+    <meta name="robots" content="noindex, follow">
+    
+    <!-- Comprehensive Favicon Suite -->
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="manifest" href="/assets/site.webmanifest">
+    <meta name="theme-color" content="#090e1a">
+    
+    <!-- Legible Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-base: #060a12;
+            --bg-card: rgba(11, 18, 32, 0.82);
+            --bg-card-header: rgba(18, 28, 48, 0.9);
+            --border-subtle: rgba(56, 189, 248, 0.16);
+            --border-glow: rgba(56, 189, 248, 0.35);
+            --text-white: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-subtle: #64748b;
+            --cyan-accent: #38bdf8;
+            --cyan-glow: rgba(56, 189, 248, 0.28);
+            --emerald-accent: #10b981;
+            --rose-accent: #f43f5e;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-display: 'Outfit', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            background-image: 
+                radial-gradient(circle at 50% 25%, rgba(2, 132, 199, 0.12) 0%, transparent 60%),
+                radial-gradient(circle at 80% 75%, rgba(16, 185, 129, 0.06) 0%, transparent 50%),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            color: var(--text-white);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 20px;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar */
+        .top-navbar {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            background: var(--bg-card);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .brand-cluster {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid var(--cyan-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cyan-accent);
+            font-size: 17px;
+            box-shadow: 0 0 14px var(--cyan-glow);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-title {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 15px;
+            letter-spacing: -0.2px;
+            color: var(--text-white);
+        }
+
+        .brand-sub {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-subtle);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .status-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: var(--emerald-accent);
+            border-radius: 6px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--emerald-accent);
+            box-shadow: 0 0 8px var(--emerald-accent);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.2); }
+        }
+
+        /* 404 Hero Container */
+        .hero-container {
+            width: 100%;
+            max-width: 860px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .error-code-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            border-radius: 6px;
+            background: rgba(244, 63, 94, 0.12);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: #fb7185;
+            font-size: 12px;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            letter-spacing: 0.5px;
+            margin-bottom: 18px;
+        }
+
+        .error-numeral {
+            font-family: var(--font-display);
+            font-size: clamp(80px, 14vw, 150px);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -4px;
+            background: linear-gradient(180deg, #f8fafc 0%, #38bdf8 50%, #0369a1 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 60px rgba(56, 189, 248, 0.35);
+            margin-bottom: 14px;
+            user-select: none;
+        }
+
+        .error-title {
+            font-family: var(--font-display);
+            font-size: clamp(22px, 3.5vw, 32px);
+            font-weight: 700;
+            color: var(--text-white);
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        .error-description {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        /* Diagnostic Terminal Box */
+        .terminal-box {
+            width: 100%;
+            max-width: 680px;
+            background: #080d17;
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+            margin-bottom: 32px;
+            text-align: left;
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: rgba(15, 23, 42, 0.85);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+            font-size: 11px;
+            font-family: var(--font-mono);
+            color: var(--text-subtle);
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ef4444; }
+        .dot-amber { background: #f59e0b; }
+        .dot-green { background: #10b981; }
+
+        .terminal-body {
+            padding: 16px 20px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .term-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .term-key {
+            color: var(--text-subtle);
+            min-width: 130px;
+        }
+
+        .term-val-err {
+            color: #fb7185;
+            font-weight: 600;
+        }
+
+        .term-val-cyan {
+            color: var(--cyan-accent);
+            word-break: break-all;
+        }
+
+        .term-val-green {
+            color: var(--emerald-accent);
+        }
+
+        /* Action Buttons Grid */
+        .actions-cluster {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            width: 100%;
+            max-width: 680px;
+            margin-bottom: 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-sans);
+        }
+
+        .btn-primary {
+            background: #0284c7;
+            color: #ffffff;
+            border: 1px solid #0284c7;
+            box-shadow: 0 4px 16px rgba(2, 132, 199, 0.35);
+        }
+
+        .btn-primary:hover {
+            background: #0369a1;
+            border-color: #0369a1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-white);
+            border: 1px solid var(--border-dark, #334155);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: var(--cyan-accent);
+            color: var(--cyan-accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .btn-outline:hover {
+            color: var(--text-white);
+            border-color: rgba(148, 163, 184, 0.5);
+            background: rgba(255, 255, 255, 0.04);
+            transform: translateY(-2px);
+        }
+
+        /* Auto-Redirect Timer */
+        .redirect-notice {
+            font-size: 12px;
+            color: var(--text-subtle);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .redirect-timer {
+            color: var(--cyan-accent);
+            font-family: var(--font-mono);
+            font-weight: 700;
+        }
+
+        .cancel-link {
+            color: var(--text-muted);
+            text-decoration: underline;
+            cursor: pointer;
+            margin-left: 4px;
+        }
+
+        .cancel-link:hover {
+            color: var(--text-white);
+        }
+
+        /* Footer */
+        .bottom-footer {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 11px;
+            color: var(--text-subtle);
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-links a {
+            color: var(--text-subtle);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .footer-links a:hover {
+            color: var(--cyan-accent);
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 14px 10px;
+                min-height: 100dvh;
+            }
+            .top-navbar {
+                padding: 10px 12px;
+                border-radius: 8px;
+            }
+            .brand-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 15px;
+            }
+            .brand-title {
+                font-size: 13px;
+            }
+            .brand-sub {
+                font-size: 9px;
+            }
+            .status-pill {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
+            .hero-container {
+                margin: 20px auto;
+                width: 100%;
+                padding: 0 4px;
+            }
+            .error-code-badge {
+                font-size: 10px;
+                padding: 4px 10px;
+                margin-bottom: 12px;
+            }
+            .error-numeral {
+                font-size: clamp(64px, 16vw, 110px);
+                letter-spacing: -2px;
+                margin-bottom: 10px;
+            }
+            .error-title {
+                font-size: clamp(18px, 4.5vw, 24px);
+                margin-bottom: 10px;
+            }
+            .error-description {
+                font-size: 13px;
+                line-height: 1.5;
+                margin-bottom: 20px;
+            }
+            .terminal-box {
+                margin-bottom: 20px;
+                border-radius: 6px;
+            }
+            .terminal-header {
+                padding: 8px 10px;
+                font-size: 10px;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            .terminal-body {
+                padding: 12px 12px;
+                font-size: 11px;
+                line-height: 1.6;
+            }
+            .term-row {
+                flex-direction: column;
+                gap: 2px;
+                margin-bottom: 8px;
+            }
+            .term-key {
+                min-width: unset;
+                font-size: 10px;
+            }
+            .actions-cluster {
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+                margin-bottom: 18px;
+            }
+            .btn {
+                width: 100%;
+                padding: 10px 14px;
+                font-size: 12px;
+            }
+            .redirect-notice {
+                font-size: 11px;
+                margin-bottom: 12px;
+            }
+            .bottom-footer {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 12px;
+                padding: 16px 6px;
+            }
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px 12px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .brand-sub {
+                display: none;
+            }
+            .status-pill span:last-child {
+                display: none;
+            }
+            .status-pill {
+                padding: 4px;
+            }
+            .footer-links {
+                gap: 6px 10px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header class="top-navbar">
+        <a href="/" class="brand-cluster">
+            <div class="brand-icon">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div class="brand-text">
+                <div class="brand-title">FLOW TESTER PRO</div>
+                <div class="brand-sub">Quantitative Trading Terminal</div>
+            </div>
+        </a>
+
+        <div class="status-pill">
+            <span class="status-dot"></span>
+            <span>Cluster Operational</span>
+        </div>
+    </header>
+
+    <!-- Main 404 Hero Area -->
+    <main class="hero-container">
+        <div class="error-code-badge">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>HTTP STATUS 404 • ROUTE UNRESOLVED</span>
+        </div>
+
+        <h1 class="error-numeral">404</h1>
+
+        <h2 class="error-title">Pipeline Stream Route Not Found</h2>
+
+        <p class="error-description">
+            The requested endpoint, resource, or model matrix does not exist in the active neural network cluster. It may have been relocated, decommissioned, or entered incorrectly.
+        </p>
+
+        <!-- Diagnostic Terminal Console -->
+        <div class="terminal-box">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <span class="dot dot-red"></span>
+                    <span class="dot dot-amber"></span>
+                    <span class="dot dot-green"></span>
+                </div>
+                <span>TELEMETRY_DIAGNOSTIC_LOG</span>
+                <span>FAIL_CODE: 404</span>
+            </div>
+            <div class="terminal-body">
+                <div class="term-row">
+                    <span class="term-key">REQUEST_URI:</span>
+                    <span class="term-val-cyan" id="disp-path">/unknown-route</span>
+                </div>
+                <div class="term-row">
+                    <span class="term-key">STATUS_CODE:</span>
+                    <span class="term-val-err">404 NOT_FOUND</span>
+                </div>
+                <div class="term-row">
+                    <span class="term-key">TIMESTAMP_UTC:</span>
+                    <span class="term-val-cyan" id="disp-timestamp">2026-10-12 12:44:00 UTC</span>
+                </div>
+                <div class="term-row">
+                    <span class="term-key">CLUSTER_STATE:</span>
+                    <span class="term-val-green">2,400 Neural Models Operational (18 Pairs Active)</span>
+                </div>
+                <div class="term-row">
+                    <span class="term-key">RESOLVER_ACTION:</span>
+                    <span class="term-val-cyan">Reroute recommended to Terminal Workspace</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="actions-cluster">
+            <a href="/" class="btn btn-primary">
+                <i class="fa-solid fa-house"></i> Return to Terminal
+            </a>
+            <a href="/?tab=tab-dashboard-jobs" class="btn btn-secondary">
+                <i class="fa-solid fa-list-check"></i> Training Matrix
+            </a>
+            <a href="/?tab=tab-leaderboard" class="btn btn-secondary">
+                <i class="fa-solid fa-trophy"></i> Backtest Ranking
+            </a>
+            <a href="/docs" class="btn btn-outline" target="_blank" rel="noopener">
+                <i class="fa-solid fa-code"></i> OpenAPI Docs
+            </a>
+        </div>
+
+        <!-- Auto Redirect Notice -->
+        <div class="redirect-notice" id="redirect-notice">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>Redirecting to terminal in <span class="redirect-timer" id="redirect-timer">15</span>s</span>
+            <span class="cancel-link" onclick="cancelRedirect()">[Cancel]</span>
+        </div>
+    </main>
+
+    <!-- Bottom Footer -->
+    <footer class="bottom-footer">
+        <div>
+            &copy; <span id="copyright-year">2026</span> Flow Tester Pro Quantitative Systems. All rights reserved.
+        </div>
+        <div class="footer-links">
+            <a href="tel:+18005550199" onclick="handlePhoneClick(event, '+1 (800) 555-0199')" title="Support Hotline: +1 (800) 555-0199" aria-label="Call Support Hotline +1 (800) 555-0199"><i class="fa-solid fa-phone" style="font-size: 10px; margin-right: 4px;"></i>+1 (800) 555-0199</a>
+            <a href="mailto:security@quantlabs.cloud" onclick="handleEmailClick(event, 'security@quantlabs.cloud')" title="Email Support: security@quantlabs.cloud" aria-label="Email Support at security@quantlabs.cloud"><i class="fa-solid fa-envelope" style="font-size: 10px; margin-right: 4px;"></i>security@quantlabs.cloud</a>
+            <a href="/?tab=tab-dashboard-jobs">Jobs Matrix</a>
+            <a href="/?tab=tab-cloud-gcp">Cloud Architecture</a>
+            <a href="/docs">API</a>
+            <a href="/storage/website_production_package.zip" download>Download Package</a>
+        </div>
+    </footer>
+
+    <script>
+        function handlePhoneClick(event, phoneNumber = '+1 (800) 555-0199') {
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(phoneNumber);
+                }
+            } catch (err) {}
+        }
+
+        function handleEmailClick(event, emailStr = 'security@quantlabs.cloud') {
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(emailStr);
+                }
+            } catch (err) {}
+        }
+        // Set dynamic copyright year
+        const copyYearEl = document.getElementById('copyright-year');
+        if (copyYearEl) {
+            copyYearEl.textContent = new Date().getFullYear();
+        }
+
+        // Populate path and timestamp from URL and browser
+        const currentPath = window.location.pathname + window.location.search;
+        const pathEl = document.getElementById('disp-path');
+        if (pathEl) {
+            pathEl.textContent = currentPath || '/';
+        }
+
+        const timeEl = document.getElementById('disp-timestamp');
+        if (timeEl) {
+            timeEl.textContent = new Date().toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+        }
+
+        // Automatic redirect countdown
+        let secondsLeft = 15;
+        let redirectCancelled = false;
+        const timerEl = document.getElementById('redirect-timer');
+        const noticeEl = document.getElementById('redirect-notice');
+
+        const countdownInterval = setInterval(() => {
+            if (redirectCancelled) {
+                clearInterval(countdownInterval);
+                return;
+            }
+            secondsLeft -= 1;
+            if (timerEl) timerEl.textContent = secondsLeft;
+            if (secondsLeft <= 0) {
+                clearInterval(countdownInterval);
+                window.location.href = '/';
+            }
+        }, 1000);
+
+        function cancelRedirect() {
+            redirectCancelled = true;
+            clearInterval(countdownInterval);
+            if (noticeEl) {
+                noticeEl.innerHTML = '<span style="color: var(--emerald-accent);"><i class="fa-solid fa-check"></i> Auto-redirect cancelled.</span>';
+            }
+        }
+    </script>
+</body>
+</html>

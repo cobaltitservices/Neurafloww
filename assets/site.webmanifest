@@ -1,0 +1,19 @@
+{
+  "name": "Flow Tester Pro - Quantitative Trading Terminal",
+  "short_name": "Flow Tester",
+  "icons": [
+    {
+      "src": "/assets/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#090e1a",
+  "background_color": "#090e1a",
+  "display": "standalone"
+}

@@ -1,0 +1,1 @@
+{"job_stats":{"total":2400,"pending":0,"queued":0,"running":0,"completed":2400,"failed":0,"retrying":0,"cancelled":0,"success_rate":100.0,"worker_desc":"Idle (100% Training Completed)"},"telemetry":{"cpu_cores":2,"cpu_percent":0.2,"ram_total_gb":3.82,"ram_used_gb":0.67,"ram_available_gb":3.16,"ram_percent":17.4,"gpu_available":false,"gpu_count":0,"gpus":[]}}
