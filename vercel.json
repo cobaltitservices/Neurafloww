@@ -5,19 +5,19 @@
   "rewrites": [
     {
       "source": "/api/v1/stats",
-      "destination": "/api/v1/stats.json"
+      "destination": "/data/v1/stats.json"
     },
     {
       "source": "/api/v1/jobs",
-      "destination": "/api/v1/jobs.json"
+      "destination": "/data/v1/jobs.json"
     },
     {
       "source": "/api/v1/backtest/results",
-      "destination": "/api/v1/backtest_results.json"
+      "destination": "/data/v1/backtest_results.json"
     },
     {
       "source": "/api/v1/paper-trading/status",
-      "destination": "/api/v1/paper_trading.json"
+      "destination": "/data/v1/paper_trading.json"
     },
     {
       "source": "/(.*)",
@@ -35,15 +35,11 @@
       ]
     },
     {
-      "source": "/api/(.*)",
+      "source": "/data/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
           "value": "*"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, OPTIONS"
         },
         {
           "key": "Content-Type",
