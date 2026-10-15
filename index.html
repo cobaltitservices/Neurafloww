@@ -1933,9 +1933,353 @@
                 display: none !important;
             }
         }
+
+        /* ==========================================================================
+           1. SCROLL PROGRESS BAR
+           ========================================================================== */
+        .scroll-progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(15, 23, 42, 0.35);
+            z-index: 10005;
+            pointer-events: none;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #0284c7 0%, #38bdf8 30%, #818cf8 70%, #06b6d4 100%);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.9), 0 0 24px rgba(14, 165, 233, 0.5);
+            transition: width 0.05s ease-out;
+        }
+
+        /* ==========================================================================
+           2. STICKY HEADERS & TABLE HEADERS
+           ========================================================================== */
+        .top-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-header);
+            border-bottom: 1px solid var(--border-subtle);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .top-header.header-scrolled {
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.65);
+            border-bottom-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .table-wrap {
+            overflow-y: auto;
+            max-height: 640px;
+            position: relative;
+        }
+
+        .table th {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 15 !important;
+            background: var(--bg-table-th) !important;
+            backdrop-filter: blur(8px) !important;
+            -webkit-backdrop-filter: blur(8px) !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+        }
+
+        /* ==========================================================================
+           3. SITE SEARCH (GLOBAL COMMAND PALETTE)
+           ========================================================================== */
+        .site-search-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            border-radius: 8px;
+            color: var(--text-cool-white);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .site-search-btn:hover {
+            background: rgba(2, 132, 199, 0.16);
+            border-color: #38bdf8;
+            color: #ffffff;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+        }
+
+        .search-key-badge {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            background: rgba(30, 41, 59, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+            padding: 1px 5px;
+            color: #94a3b8;
+        }
+
+        .global-search-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: 10002;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 80px 16px 30px;
+            animation: fadeIn 0.15s ease-out;
+        }
+
+        .global-search-card {
+            background: #0b1329;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 14px;
+            width: 100%;
+            max-width: 660px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75), 0 0 30px rgba(2, 132, 199, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .global-search-input-wrap {
+            display: flex;
+            align-items: center;
+            padding: 16px 18px;
+            gap: 12px;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+            background: rgba(15, 23, 42, 0.6);
+        }
+
+        .global-search-icon {
+            font-size: 18px;
+            color: #38bdf8;
+        }
+
+        .global-search-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #f8fafc;
+            font-size: 15px;
+            font-weight: 500;
+            outline: none;
+        }
+
+        .global-search-esc-hint {
+            font-size: 10px;
+            font-family: var(--font-mono);
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            padding: 3px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .global-search-quick-tags {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 18px;
+            background: rgba(15, 23, 42, 0.4);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .search-quick-tag {
+            font-size: 11px;
+            font-weight: 600;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: #38bdf8;
+            padding: 3px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.15s ease;
+        }
+
+        .search-quick-tag:hover {
+            background: rgba(2, 132, 199, 0.25);
+            border-color: #38bdf8;
+            color: #ffffff;
+        }
+
+        .global-search-results {
+            max-height: 380px;
+            overflow-y: auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .search-result-group-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #64748b;
+            padding: 8px 10px 4px;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: #cbd5e1;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            background: transparent;
+        }
+
+        .search-result-item:hover,
+        .search-result-item.selected {
+            background: rgba(2, 132, 199, 0.2);
+            color: #ffffff;
+            border-left: 3px solid #38bdf8;
+            padding-left: 14px;
+        }
+
+        .search-item-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-item-icon {
+            font-size: 14px;
+            color: #38bdf8;
+            width: 18px;
+            text-align: center;
+        }
+
+        .search-item-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: inherit;
+        }
+
+        .search-item-sub {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        .search-item-badge {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #38bdf8;
+        }
+
+        .global-search-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 18px;
+            background: rgba(15, 23, 42, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        .search-kbd-help {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-kbd-help kbd {
+            font-family: var(--font-mono);
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-size: 10px;
+            color: #94a3b8;
+            margin-right: 2px;
+        }
+
+        /* ==========================================================================
+           4. UTM TRACKING PILL & MODAL
+           ========================================================================== */
+        .utm-tracking-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 11px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 8px;
+            color: var(--text-cool-white);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .utm-tracking-pill:hover {
+            background: rgba(2, 132, 199, 0.18);
+            border-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+        }
+
+        .utm-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 7, 18, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: 10002;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.15s ease-out;
+        }
+
+        .utm-card {
+            background: #0b1329;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 14px;
+            width: 100%;
+            max-width: 580px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75), 0 0 30px rgba(2, 132, 199, 0.2);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body>
+
+    <!-- SCROLL PROGRESS BAR -->
+    <div id="scroll-progress-container" class="scroll-progress-container" aria-hidden="true">
+        <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
+    </div>
 
     <div class="app-layout">
         <!-- Mobile Sidebar Backdrop Overlay -->
@@ -2119,6 +2463,19 @@
                     </div>
 
                     <div class="header-actions">
+                        <!-- 4. GLOBAL SITE SEARCH TRIGGER -->
+                        <button class="site-search-btn" id="site-search-trigger" onclick="openGlobalSearch()" title="Global Site Search (Press / or ⌘K)" aria-label="Search site">
+                            <i class="fa-solid fa-magnifying-glass" style="color: #38bdf8;"></i>
+                            <span class="search-btn-label">Search site...</span>
+                            <kbd class="search-key-badge">⌘K</kbd>
+                        </button>
+
+                        <!-- 2. UTM TRACKING STATUS PILL -->
+                        <div id="utm-tracking-pill" class="utm-tracking-pill" title="Click to view UTM Attribution & Campaign parameters" onclick="openUtmModal()">
+                            <i class="fa-solid fa-bullhorn" style="color: #38bdf8;"></i>
+                            <span id="utm-pill-text">Direct / Organic</span>
+                        </div>
+
                         <!-- Notification Bell Dropdown Container -->
                         <div class="notification-bell-container">
                             <button class="btn btn-outline notification-bell-btn" id="notification-bell-btn" onclick="toggleNotificationDropdown(event)" title="Notifications">
@@ -3115,6 +3472,26 @@
 
                             <!-- SUBTAB 1: Live User Visit Activity -->
                             <div id="admin-subtab-visits" class="admin-subtab-content">
+                                <!-- UTM CAMPAIGN & TRAFFIC ATTRIBUTION TELEMETRY CARD -->
+                                <div id="admin-utm-card" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 12px 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                        <div style="width: 34px; height: 34px; border-radius: 6px; background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center; color: #38bdf8;">
+                                            <i class="fa-solid fa-bullhorn"></i>
+                                        </div>
+                                        <div>
+                                            <div style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Active Traffic Attribution (UTM)</div>
+                                            <div style="font-size: 13px; font-weight: 600; color: #f8fafc;" id="admin-utm-summary">Direct / Organic Traffic</div>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span class="badge badge-completed" id="admin-utm-source-badge" style="font-size: 10px;">source: direct</span>
+                                        <span class="badge badge-pending" id="admin-utm-medium-badge" style="font-size: 10px;">medium: none</span>
+                                        <button onclick="openUtmModal()" class="btn btn-outline" style="padding: 4px 10px; font-size: 11px;">
+                                            <i class="fa-solid fa-sliders"></i> UTM Inspector & Builder
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <div class="table-wrap" style="max-height: 520px; overflow-y: auto;">
                                     <table class="table">
                                         <thead>
@@ -3607,7 +3984,7 @@
                     <div style="position: relative;">
                         <input type="password" id="admin-password-input" required autocomplete="current-password" style="width: 100%; padding: 12px 42px 12px 40px; background: #1e293b; border: 1px solid #334155; border-radius: 6px; color: #f8fafc; font-size: 14px; outline: none; transition: border-color 0.15s ease;" onfocus="this.style.borderColor='#0284c7';" onblur="this.style.borderColor='#334155';">
                         <i class="fa-solid fa-lock" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 15px;"></i>
-                        <button type="button" onclick="toggleAdminPasswordVisibility()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #64748b; cursor: pointer; padding: 4px;" title="Toggle Password Visibility">
+                        <button type="button" id="admin-pw-toggle-btn" onclick="toggleAdminPasswordVisibility()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(51, 65, 85, 0.4); border: 1px solid rgba(100, 116, 139, 0.3); border-radius: 4px; color: #94a3b8; cursor: pointer; padding: 6px 8px; display: flex; align-items: center; justify-content: center; transition: all 0.15s ease;" title="Toggle Password Visibility" aria-label="Toggle password visibility">
                             <i id="admin-pw-toggle-icon" class="fa-solid fa-eye"></i>
                         </button>
                     </div>
@@ -3624,6 +4001,165 @@
             </form>
         </div>
 
+    </div>
+
+    <!-- CHANGE ADMIN PASSWORD MODAL WITH VISIBILITY TOGGLES -->
+    <div id="change-pw-modal-overlay" class="modal-overlay" style="display: none; position: fixed; inset: 0; background: rgba(3, 7, 18, 0.88); backdrop-filter: blur(16px); z-index: 10000; align-items: center; justify-content: center; animation: fadeIn 0.2s ease-out;" onclick="if(event.target === this) closeChangePasswordModal()">
+        <div style="background: #0f172a; border: 1px solid #334155; border-radius: 12px; width: 92%; max-width: 460px; padding: 28px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7); position: relative;">
+            <button onclick="closeChangePasswordModal()" style="position: absolute; top: 18px; right: 20px; background: transparent; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div style="width: 50px; height: 50px; border-radius: 10px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto;">
+                    <i class="fa-solid fa-key" style="font-size: 22px; color: #f59e0b;"></i>
+                </div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #f8fafc; margin-bottom: 4px;">Update Admin Password</h3>
+                <p style="font-size: 12px; color: #94a3b8; margin: 0;">Enter your existing password and choose a secure new password.</p>
+            </div>
+
+            <form onsubmit="handleChangePasswordSubmit(event)" style="display: flex; flex-direction: column; gap: 14px;">
+                <div>
+                    <label style="font-size: 11px; font-weight: 700; color: #cbd5e1; text-transform: uppercase; display: block; margin-bottom: 6px;">Current Password</label>
+                    <div style="position: relative;">
+                        <input type="password" id="cpw-current" required autocomplete="current-password" style="width: 100%; padding: 10px 42px 10px 38px; background: #1e293b; border: 1px solid #334155; border-radius: 6px; color: #f8fafc; font-size: 13px; outline: none;">
+                        <i class="fa-solid fa-lock" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #64748b;"></i>
+                        <button type="button" onclick="togglePasswordVisibility('cpw-current', 'cpw-current-icon', this)" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #94a3b8; cursor: pointer; padding: 4px;" title="Toggle Visibility">
+                            <i id="cpw-current-icon" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label style="font-size: 11px; font-weight: 700; color: #cbd5e1; text-transform: uppercase; display: block; margin-bottom: 6px;">New Password (min 6 chars)</label>
+                    <div style="position: relative;">
+                        <input type="password" id="cpw-new" required minlength="6" autocomplete="new-password" style="width: 100%; padding: 10px 42px 10px 38px; background: #1e293b; border: 1px solid #334155; border-radius: 6px; color: #f8fafc; font-size: 13px; outline: none;">
+                        <i class="fa-solid fa-shield-halved" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #64748b;"></i>
+                        <button type="button" onclick="togglePasswordVisibility('cpw-new', 'cpw-new-icon', this)" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #94a3b8; cursor: pointer; padding: 4px;" title="Toggle Visibility">
+                            <i id="cpw-new-icon" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label style="font-size: 11px; font-weight: 700; color: #cbd5e1; text-transform: uppercase; display: block; margin-bottom: 6px;">Confirm New Password</label>
+                    <div style="position: relative;">
+                        <input type="password" id="cpw-confirm" required minlength="6" autocomplete="new-password" style="width: 100%; padding: 10px 42px 10px 38px; background: #1e293b; border: 1px solid #334155; border-radius: 6px; color: #f8fafc; font-size: 13px; outline: none;">
+                        <i class="fa-solid fa-check-double" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #64748b;"></i>
+                        <button type="button" onclick="togglePasswordVisibility('cpw-confirm', 'cpw-confirm-icon', this)" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #94a3b8; cursor: pointer; padding: 4px;" title="Toggle Visibility">
+                            <i id="cpw-confirm-icon" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button type="button" onclick="closeChangePasswordModal()" style="flex: 1; padding: 10px; background: #1e293b; border: 1px solid #334155; border-radius: 6px; color: #94a3b8; font-size: 12px; font-weight: 600; cursor: pointer;">Cancel</button>
+                    <button type="submit" style="flex: 1.5; padding: 10px; background: #f59e0b; border: 1px solid #f59e0b; border-radius: 6px; color: #000; font-size: 12px; font-weight: 700; cursor: pointer;">Save Password</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 4. GLOBAL SITE SEARCH MODAL & COMMAND PALETTE -->
+    <div id="global-search-modal-overlay" class="global-search-overlay" style="display: none;" onclick="if(event.target === this) closeGlobalSearch()">
+        <div class="global-search-card" role="dialog" aria-modal="true" aria-label="Global Site Search">
+            <div class="global-search-input-wrap">
+                <i class="fa-solid fa-magnifying-glass global-search-icon"></i>
+                <input type="text" id="global-search-input" class="global-search-input" placeholder="Search pairs (BTC), models (LSTM), pages, actions, logs..." oninput="handleGlobalSearchInput(this.value)" onkeydown="handleGlobalSearchKeydown(event)" autocomplete="off">
+                <span class="global-search-esc-hint" onclick="closeGlobalSearch()" title="Close search">ESC</span>
+            </div>
+            <div class="global-search-quick-tags">
+                <span class="search-quick-tag" onclick="quickSearchTag('BTC')"><i class="fa-brands fa-bitcoin"></i> BTC</span>
+                <span class="search-quick-tag" onclick="quickSearchTag('ETH')"><i class="fa-brands fa-ethereum"></i> ETH</span>
+                <span class="search-quick-tag" onclick="quickSearchTag('SOL')">SOL</span>
+                <span class="search-quick-tag" onclick="quickSearchTag('Transformer')"><i class="fa-solid fa-brain"></i> Transformer</span>
+                <span class="search-quick-tag" onclick="quickSearchTag('LSTM')">LSTM</span>
+                <span class="search-quick-tag" onclick="quickSearchTag('Paper Trading')"><i class="fa-solid fa-wallet"></i> Paper Trading</span>
+                <span class="search-quick-tag" onclick="quickSearchTag('Leaderboard')"><i class="fa-solid fa-trophy"></i> Leaderboard</span>
+                <span class="search-quick-tag" onclick="quickSearchTag('Admin')"><i class="fa-solid fa-shield-halved"></i> Admin</span>
+            </div>
+            <div id="global-search-results" class="global-search-results">
+                <!-- Search results injected dynamically -->
+            </div>
+            <div class="global-search-footer">
+                <div class="search-kbd-help">
+                    <span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
+                    <span><kbd>↵</kbd> Select</span>
+                    <span><kbd>ESC</kbd> Close</span>
+                </div>
+                <span>Flow Tester Universal Index</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. UTM ATTRIBUTION & CAMPAIGN BUILDER MODAL -->
+    <div id="utm-modal-overlay" class="utm-modal-overlay" style="display: none;" onclick="if(event.target === this) closeUtmModal()">
+        <div class="utm-card" role="dialog" aria-modal="true" aria-label="UTM Attribution & Campaign Builder">
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(56, 189, 248, 0.2); padding-bottom: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 38px; height: 38px; border-radius: 8px; background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center; color: #38bdf8; font-size: 18px;">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+                    <div>
+                        <h3 style="font-size: 16px; font-weight: 700; color: #f8fafc; margin: 0;">UTM Tracking & Attribution</h3>
+                        <p style="font-size: 11px; color: #94a3b8; margin: 0;">Campaign performance and URL parameter builder</p>
+                    </div>
+                </div>
+                <button onclick="closeUtmModal()" style="background: transparent; border: none; color: #94a3b8; font-size: 18px; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <!-- Active UTM Telemetry Values -->
+            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 14px;">
+                <div style="font-size: 11px; font-weight: 700; color: #38bdf8; text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-fingerprint"></i> Current Visitor Attribution Data
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 12px;">
+                    <div><span style="color: #64748b;">Source:</span> <b id="utm-val-source" style="color: #f8fafc;">direct</b></div>
+                    <div><span style="color: #64748b;">Medium:</span> <b id="utm-val-medium" style="color: #f8fafc;">none</b></div>
+                    <div><span style="color: #64748b;">Campaign:</span> <b id="utm-val-campaign" style="color: #f8fafc;">organic</b></div>
+                    <div><span style="color: #64748b;">Term:</span> <b id="utm-val-term" style="color: #f8fafc;">(not set)</b></div>
+                    <div><span style="color: #64748b;">Content:</span> <b id="utm-val-content" style="color: #f8fafc;">(not set)</b></div>
+                    <div><span style="color: #64748b;">Captured At:</span> <b id="utm-val-time" style="color: #f8fafc;">Just now</b></div>
+                </div>
+            </div>
+
+            <!-- Campaign URL Builder -->
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="font-size: 11px; font-weight: 700; color: #cbd5e1; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-link"></i> Campaign Tracking URL Builder
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <div>
+                        <label style="font-size: 10px; color: #94a3b8; display: block; margin-bottom: 3px;">Campaign Source (e.g. twitter, google)</label>
+                        <input type="text" id="builder-utm-source" class="input-field" placeholder="twitter" oninput="buildCustomUtmUrl()" style="width: 100%; font-size: 12px; padding: 6px 10px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 10px; color: #94a3b8; display: block; margin-bottom: 3px;">Campaign Medium (e.g. social, cpc)</label>
+                        <input type="text" id="builder-utm-medium" class="input-field" placeholder="social" oninput="buildCustomUtmUrl()" style="width: 100%; font-size: 12px; padding: 6px 10px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 10px; color: #94a3b8; display: block; margin-bottom: 3px;">Campaign Name (e.g. launch_v3)</label>
+                        <input type="text" id="builder-utm-campaign" class="input-field" placeholder="launch_v3" oninput="buildCustomUtmUrl()" style="width: 100%; font-size: 12px; padding: 6px 10px;">
+                    </div>
+                    <div>
+                        <label style="font-size: 10px; color: #94a3b8; display: block; margin-bottom: 3px;">Campaign Content (optional)</label>
+                        <input type="text" id="builder-utm-content" class="input-field" placeholder="hero_banner" oninput="buildCustomUtmUrl()" style="width: 100%; font-size: 12px; padding: 6px 10px;">
+                    </div>
+                </div>
+
+                <div>
+                    <label style="font-size: 10px; color: #94a3b8; display: block; margin-bottom: 3px;">Generated Tagged Link</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="text" id="builder-utm-output" readonly style="flex: 1; background: #060911; border: 1px solid #334155; border-radius: 6px; padding: 8px 10px; color: #38bdf8; font-family: var(--font-mono); font-size: 11px;">
+                        <button onclick="copyGeneratedUtmUrl()" class="btn" style="padding: 8px 14px; font-size: 11px; white-space: nowrap;">
+                            <i class="fa-solid fa-copy"></i> Copy Link
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; margin-top: 4px;">
+                <button type="button" onclick="closeUtmModal()" class="btn btn-outline" style="padding: 8px 16px; font-size: 12px;">Close</button>
+            </div>
+        </div>
     </div>
 
     <!-- JOB INSPECTION MODAL DRAWER -->
@@ -4236,18 +4772,28 @@
 
         let isAdminAuthenticated = sessionStorage.getItem('admin_token') === 'valid';
 
-        function toggleAdminPasswordVisibility() {
-            const pwInput = document.getElementById('admin-password-input');
-            const icon = document.getElementById('admin-pw-toggle-icon');
-            if (pwInput && icon) {
-                if (pwInput.type === 'password') {
-                    pwInput.type = 'text';
-                    icon.className = 'fa-solid fa-eye-slash';
-                } else {
-                    pwInput.type = 'password';
-                    icon.className = 'fa-solid fa-eye';
-                }
+        // ==========================================================================
+        // 1. PASSWORD VISIBILITY TOGGLE SYSTEM
+        // ==========================================================================
+        function togglePasswordVisibility(inputId, iconId, btnEl) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (!input) return;
+            if (input.type === 'password') {
+                input.type = 'text';
+                if (icon) icon.className = 'fa-solid fa-eye-slash';
+                if (btnEl) btnEl.style.color = '#38bdf8';
+                showNotification('info', 'Visibility', 'Password revealed');
+            } else {
+                input.type = 'password';
+                if (icon) icon.className = 'fa-solid fa-eye';
+                if (btnEl) btnEl.style.color = '#94a3b8';
+                showNotification('info', 'Visibility', 'Password hidden');
             }
+        }
+
+        function toggleAdminPasswordVisibility() {
+            togglePasswordVisibility('admin-password-input', 'admin-pw-toggle-icon', document.getElementById('admin-pw-toggle-btn'));
         }
 
         function openAdminAuthModal() {
@@ -4256,9 +4802,12 @@
                 modal.style.display = 'flex';
                 const userInput = document.getElementById('admin-username-input');
                 const pwInput = document.getElementById('admin-password-input');
+                const icon = document.getElementById('admin-pw-toggle-icon');
                 if (userInput && !userInput.value) userInput.value = 'admin';
                 if (pwInput) {
+                    pwInput.type = 'password';
                     pwInput.value = '';
+                    if (icon) icon.className = 'fa-solid fa-eye';
                     setTimeout(() => pwInput.focus(), 100);
                 }
                 const err = document.getElementById('admin-auth-error-msg');
@@ -4269,6 +4818,64 @@
         function closeAdminAuthModal() {
             const modal = document.getElementById('admin-auth-modal-overlay');
             if (modal) modal.style.display = 'none';
+        }
+
+        function openChangePasswordModal() {
+            if (!isAdminAuthenticated) {
+                openAdminAuthModal();
+                return;
+            }
+            const modal = document.getElementById('change-pw-modal-overlay');
+            if (modal) {
+                modal.style.display = 'flex';
+                ['cpw-current', 'cpw-new', 'cpw-confirm'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) { el.value = ''; el.type = 'password'; }
+                });
+                ['cpw-current-icon', 'cpw-new-icon', 'cpw-confirm-icon'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.className = 'fa-solid fa-eye';
+                });
+            }
+        }
+
+        function closeChangePasswordModal() {
+            const modal = document.getElementById('change-pw-modal-overlay');
+            if (modal) modal.style.display = 'none';
+        }
+
+        async function handleChangePasswordSubmit(e) {
+            e.preventDefault();
+            const currentPw = document.getElementById('cpw-current').value;
+            const newPw = document.getElementById('cpw-new').value;
+            const confirmPw = document.getElementById('cpw-confirm').value;
+
+            if (newPw !== confirmPw) {
+                showNotification('error', 'Mismatch', 'New passwords do not match!');
+                return;
+            }
+            if (newPw.length < 6) {
+                showNotification('error', 'Too Short', 'Password must be at least 6 characters.');
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/v1/admin/change-password', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({current_password: currentPw, new_password: newPw})
+                });
+                let data = {};
+                try { data = await res.json(); } catch(err) { data = { detail: res.statusText }; }
+                if (res.ok) {
+                    showNotification('success', 'Password Updated', 'Admin password changed successfully!');
+                    closeChangePasswordModal();
+                } else {
+                    showNotification('error', 'Update Failed', data.detail || 'Failed to update password');
+                }
+            } catch(err) {
+                showNotification('error', 'Network Error', String(err));
+            }
         }
 
         function openPrivacyModal() {
@@ -4379,31 +4986,364 @@
             showNotification('info', 'Session Locked', 'Admin Panel session locked.');
         }
 
-        async function openChangePasswordModal() {
-            if (!isAdminAuthenticated) {
-                openAdminAuthModal();
+        // ==========================================================================
+        // 3. SCROLL PROGRESS BAR SYSTEM
+        // ==========================================================================
+        function initScrollProgressBar() {
+            const progressBar = document.getElementById('scroll-progress-bar');
+            const header = document.querySelector('.top-header');
+
+            const handleScroll = () => {
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+                
+                if (progressBar) {
+                    progressBar.style.width = Math.min(100, Math.max(0, progress)) + '%';
+                }
+
+                if (header) {
+                    if (scrollTop > 10) {
+                        header.classList.add('header-scrolled');
+                    } else {
+                        header.classList.remove('header-scrolled');
+                    }
+                }
+            };
+
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            handleScroll();
+        }
+
+        // ==========================================================================
+        // 2. UTM TRACKING & CAMPAIGN ATTRIBUTION SYSTEM
+        // ==========================================================================
+        const UTM_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'ref'];
+
+        function initUtmTracking() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                let currentUtm = {};
+                let hasUtmInUrl = false;
+
+                UTM_FIELDS.forEach(f => {
+                    if (urlParams.has(f)) {
+                        currentUtm[f] = urlParams.get(f);
+                        hasUtmInUrl = true;
+                    }
+                });
+
+                if (document.referrer && !currentUtm.referrer) {
+                    currentUtm.referrer = document.referrer;
+                }
+
+                if (hasUtmInUrl) {
+                    currentUtm.captured_at = new Date().toLocaleString();
+                    currentUtm.landing_path = window.location.pathname;
+                    sessionStorage.setItem('flow_utm_session', JSON.stringify(currentUtm));
+                    if (!localStorage.getItem('flow_utm_first_touch')) {
+                        localStorage.setItem('flow_utm_first_touch', JSON.stringify(currentUtm));
+                    }
+                }
+
+                const active = JSON.parse(sessionStorage.getItem('flow_utm_session') || localStorage.getItem('flow_utm_first_touch') || '{}');
+                renderUtmData(active);
+            } catch(e) {
+                console.warn('UTM Tracking Error:', e);
+            }
+        }
+
+        function renderUtmData(utm) {
+            const source = utm.utm_source || 'direct';
+            const medium = utm.utm_medium || 'none';
+            const campaign = utm.utm_campaign || 'organic';
+
+            const pillText = document.getElementById('utm-pill-text');
+            if (pillText) {
+                if (source !== 'direct' || campaign !== 'organic') {
+                    pillText.textContent = `${source} / ${medium}`;
+                } else {
+                    pillText.textContent = 'Direct / Organic';
+                }
+            }
+
+            const adminSummary = document.getElementById('admin-utm-summary');
+            if (adminSummary) {
+                adminSummary.textContent = `${source} / ${medium} (${campaign})`;
+            }
+            const sBadge = document.getElementById('admin-utm-source-badge');
+            if (sBadge) sBadge.textContent = `source: ${source}`;
+            const mBadge = document.getElementById('admin-utm-medium-badge');
+            if (mBadge) mBadge.textContent = `medium: ${medium}`;
+
+            const vSrc = document.getElementById('utm-val-source');
+            if (vSrc) vSrc.textContent = source;
+            const vMed = document.getElementById('utm-val-medium');
+            if (vMed) vMed.textContent = medium;
+            const vCamp = document.getElementById('utm-val-campaign');
+            if (vCamp) vCamp.textContent = campaign;
+            const vTerm = document.getElementById('utm-val-term');
+            if (vTerm) vTerm.textContent = utm.utm_term || '(none)';
+            const vCont = document.getElementById('utm-val-content');
+            if (vCont) vCont.textContent = utm.utm_content || '(none)';
+            const vTime = document.getElementById('utm-val-time');
+            if (vTime) vTime.textContent = utm.captured_at || 'Current Session';
+        }
+
+        function openUtmModal() {
+            const modal = document.getElementById('utm-modal-overlay');
+            if (modal) modal.style.display = 'flex';
+            buildCustomUtmUrl();
+        }
+
+        function closeUtmModal() {
+            const modal = document.getElementById('utm-modal-overlay');
+            if (modal) modal.style.display = 'none';
+        }
+
+        function buildCustomUtmUrl() {
+            const base = window.location.origin + window.location.pathname;
+            const s = (document.getElementById('builder-utm-source')?.value || '').trim();
+            const m = (document.getElementById('builder-utm-medium')?.value || '').trim();
+            const c = (document.getElementById('builder-utm-campaign')?.value || '').trim();
+            const cont = (document.getElementById('builder-utm-content')?.value || '').trim();
+
+            const params = new URLSearchParams();
+            if (s) params.set('utm_source', s);
+            if (m) params.set('utm_medium', m);
+            if (c) params.set('utm_campaign', c);
+            if (cont) params.set('utm_content', cont);
+
+            const out = params.toString() ? `${base}?${params.toString()}` : base;
+            const outEl = document.getElementById('builder-utm-output');
+            if (outEl) outEl.value = out;
+        }
+
+        function copyGeneratedUtmUrl() {
+            const outEl = document.getElementById('builder-utm-output');
+            if (outEl && outEl.value) {
+                navigator.clipboard.writeText(outEl.value).then(() => {
+                    showNotification('success', 'Link Copied', 'Campaign tracking URL copied to clipboard!');
+                }).catch(() => {
+                    outEl.select();
+                    document.execCommand('copy');
+                    showNotification('success', 'Link Copied', 'Campaign tracking URL copied!');
+                });
+            }
+        }
+
+        // ==========================================================================
+        // 4. GLOBAL SITE SEARCH & COMMAND PALETTE SYSTEM
+        // ==========================================================================
+        const SITE_SEARCH_CATALOG = [
+            // Tabs
+            { type: 'Page', title: 'Training Jobs Matrix', sub: 'Active 1,824 neural network training pipeline', icon: 'fa-solid fa-table-cells', action: () => switchTab('tab-dashboard-jobs') },
+            { type: 'Page', title: 'Model Leaderboard', sub: 'Comprehensive model rankings & financial metrics', icon: 'fa-solid fa-trophy', action: () => switchTab('tab-models-leaderboard') },
+            { type: 'Page', title: 'Paper Trading Terminal', sub: 'Simulated real-time execution & order book testing', icon: 'fa-solid fa-wallet', action: () => switchTab('tab-paper-trading') },
+            { type: 'Page', title: 'Activity Logs', sub: 'Real-time telemetry and cluster audit logs', icon: 'fa-solid fa-list-check', action: () => switchTab('tab-realtime-logs') },
+            { type: 'Page', title: 'Admin Console', sub: 'Control center, processes & visitor analytics', icon: 'fa-solid fa-shield-halved', action: () => { switchTab('tab-admin-panel'); if(!isAdminAuthenticated) openAdminAuthModal(); } },
+            { type: 'Page', title: 'API & Swagger Docs', sub: 'FastAPI Interactive Endpoints & OpenAPI specification', icon: 'fa-solid fa-code', action: () => switchTab('tab-api-swagger') },
+            
+            // Pairs
+            { type: 'Pair', title: 'BTC/USDT', sub: 'Bitcoin Spot & Futures Model Cluster', icon: 'fa-brands fa-bitcoin', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('BTC_USDT'); } },
+            { type: 'Pair', title: 'ETH/USDT', sub: 'Ethereum Smart Contract Cluster', icon: 'fa-brands fa-ethereum', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('ETH_USDT'); } },
+            { type: 'Pair', title: 'SOL/USDT', sub: 'Solana High-Frequency Cluster', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('SOL_USDT'); } },
+            { type: 'Pair', title: 'XRP/USDT', sub: 'Ripple Payment Network Cluster', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('XRP_USDT'); } },
+            { type: 'Pair', title: 'DOGE/USDT', sub: 'Dogecoin Quantitative Models', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('DOGE_USDT'); } },
+            { type: 'Pair', title: 'ADA/USDT', sub: 'Cardano Predictive Model Suite', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('ADA_USDT'); } },
+            { type: 'Pair', title: 'AVAX/USDT', sub: 'Avalanche Scalable Subnet Models', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('AVAX_USDT'); } },
+            { type: 'Pair', title: 'LINK/USDT', sub: 'Chainlink Oracle Feed Predictors', icon: 'fa-solid fa-link', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('LINK_USDT'); } },
+            { type: 'Pair', title: 'BNB/USDT', sub: 'BNB Chain Deep Learning Suite', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('BNB_USDT'); } },
+            { type: 'Pair', title: 'NEAR/USDT', sub: 'Near Protocol Sharded Network Models', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('NEAR_USDT'); } },
+            { type: 'Pair', title: 'MATIC/USDT', sub: 'Polygon Layer 2 Quant Suite', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('MATIC_USDT'); } },
+            { type: 'Pair', title: 'DOT/USDT', sub: 'Polkadot Interoperability Models', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('DOT_USDT'); } },
+            { type: 'Pair', title: 'LTC/USDT', sub: 'Litecoin Payment Momentum Suite', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('LTC_USDT'); } },
+            { type: 'Pair', title: 'ATOM/USDT', sub: 'Cosmos Hub Prediction Models', icon: 'fa-solid fa-atom', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('ATOM_USDT'); } },
+            { type: 'Pair', title: 'UNI/USDT', sub: 'Uniswap AMM Automated Predictors', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('UNI_USDT'); } },
+            { type: 'Pair', title: 'SHIB/USDT', sub: 'Shiba Inu Deep Learning Models', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('SHIB_USDT'); } },
+            { type: 'Pair', title: 'ZEC/USDT', sub: 'Zcash Privacy Network Models', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('ZEC_USDT'); } },
+            { type: 'Pair', title: 'TRX/USDT', sub: 'Tron Network High Throughput Models', icon: 'fa-solid fa-coins', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel('TRX_USDT'); } },
+
+            // Neural Architectures
+            { type: 'Architecture', title: 'Transformer Model', sub: 'Multi-Head Attention Network (Architecture 4)', icon: 'fa-solid fa-brain', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel(null, 'TRANSFORMER'); } },
+            { type: 'Architecture', title: 'LSTM Model', sub: 'Long Short-Term Memory Network (Architecture 1)', icon: 'fa-solid fa-network-wired', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel(null, 'LSTM'); } },
+            { type: 'Architecture', title: 'GRU Model', sub: 'Gated Recurrent Unit Network (Architecture 2)', icon: 'fa-solid fa-network-wired', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel(null, 'GRU'); } },
+            { type: 'Architecture', title: 'TCN Model', sub: 'Temporal Convolutional Network (Architecture 3)', icon: 'fa-solid fa-chart-line', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel(null, 'TCN'); } },
+            { type: 'Architecture', title: 'CNN-LSTM Hybrid', sub: 'Spatiotemporal Convolutional Recurrent (Architecture 5)', icon: 'fa-solid fa-microchip', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel(null, 'CNNLSTM'); } },
+            { type: 'Architecture', title: 'MLP-Mixer Model', sub: 'Multi-Layer Perceptron Token/Channel Mixer (Architecture 6)', icon: 'fa-solid fa-layer-group', action: () => { switchTab('tab-models-leaderboard'); filterByPairAndModel(null, 'MLP_MIXER'); } },
+
+            // Actions & Tools
+            { type: 'Action', title: 'Filter Top 1% Best Models', sub: 'Display top 99th percentile institutional performers', icon: 'fa-solid fa-crown', action: () => { switchTab('tab-models-leaderboard'); filterLeaderboardTier('top1'); } },
+            { type: 'Action', title: 'Filter Top 10% Models', sub: 'Display top decile high-accuracy models', icon: 'fa-solid fa-medal', action: () => { switchTab('tab-models-leaderboard'); filterLeaderboardTier('top10'); } },
+            { type: 'Action', title: 'Filter Top 24 Models', sub: 'Display benchmark top 24 active trading models', icon: 'fa-solid fa-star', action: () => { switchTab('tab-models-leaderboard'); filterLeaderboardTier('top24'); } },
+            { type: 'Action', title: 'Export Full Backtest CSV', sub: 'Download all 1,824 backtested model metrics', icon: 'fa-solid fa-file-csv', action: () => exportLeaderboard('csv') },
+            { type: 'Action', title: 'Download Master PDF Report', sub: 'Generate 10-page quantitative engineering report', icon: 'fa-solid fa-file-pdf', action: () => window.open('/storage/Flow_Tester_AI_Quant_Full_Report.pdf', '_blank') },
+            { type: 'Action', title: 'UTM Attribution & Link Builder', sub: 'Inspect traffic parameters or generate campaign URLs', icon: 'fa-solid fa-bullhorn', action: () => openUtmModal() },
+            { type: 'Action', title: 'Toggle Light / Dark Mode', sub: 'Switch visual terminal color scheme', icon: 'fa-solid fa-circle-half-stroke', action: () => toggleTheme() },
+            { type: 'Action', title: 'Call Support Hotline', sub: 'Dial operations team: +1 (800) 555-0199', icon: 'fa-solid fa-phone', action: () => handlePhoneClick(null, '+1 (800) 555-0199') },
+            { type: 'Action', title: 'Email Security & Operations', sub: 'Send support email to security@quantlabs.cloud', icon: 'fa-solid fa-envelope', action: () => handleEmailClick(null, 'security@quantlabs.cloud') },
+
+            // Legal & Docs
+            { type: 'Legal', title: 'Privacy Policy', sub: 'Compliance, security standards & data handling', icon: 'fa-solid fa-shield-cat', action: () => openPrivacyModal() },
+            { type: 'Legal', title: 'Terms & Conditions', sub: 'Service agreement, usage bounds & quant disclaimers', icon: 'fa-solid fa-file-contract', action: () => openTermsModal() }
+        ];
+
+        let selectedSearchIndex = 0;
+
+        function openGlobalSearch() {
+            const overlay = document.getElementById('global-search-modal-overlay');
+            const input = document.getElementById('global-search-input');
+            if (overlay) {
+                overlay.style.display = 'flex';
+                if (input) {
+                    input.value = '';
+                    setTimeout(() => input.focus(), 60);
+                }
+                renderSearchResults('');
+            }
+        }
+
+        function closeGlobalSearch() {
+            const overlay = document.getElementById('global-search-modal-overlay');
+            if (overlay) overlay.style.display = 'none';
+        }
+
+        function handleGlobalSearchInput(query) {
+            selectedSearchIndex = 0;
+            renderSearchResults(query);
+        }
+
+        function quickSearchTag(tag) {
+            const input = document.getElementById('global-search-input');
+            if (input) {
+                input.value = tag;
+                handleGlobalSearchInput(tag);
+                input.focus();
+            }
+        }
+
+        function renderSearchResults(query) {
+            const container = document.getElementById('global-search-results');
+            if (!container) return;
+
+            const q = (query || '').toLowerCase().trim();
+            const matches = SITE_SEARCH_CATALOG.filter(item => {
+                if (!q) return true;
+                return item.title.toLowerCase().includes(q) ||
+                       item.sub.toLowerCase().includes(q) ||
+                       item.type.toLowerCase().includes(q);
+            }).slice(0, 16);
+
+            if (matches.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 30px; color: #94a3b8;">
+                        <i class="fa-solid fa-magnifying-glass" style="font-size: 26px; color: #475569; margin-bottom: 10px; display: block;"></i>
+                        <p style="margin: 0; font-size: 13px;">No results found matching "<b>${query}</b>"</p>
+                        <p style="margin: 4px 0 0; font-size: 11px; color: #64748b;">Try searching for a pair like BTC, model like LSTM, or page like Admin</p>
+                    </div>
+                `;
                 return;
             }
-            const currentPw = prompt("Enter Current Admin Password:");
-            if (!currentPw) return;
-            const newPw = prompt("Enter NEW Admin Password (min 4 characters):");
-            if (!newPw) return;
 
-            try {
-                const res = await fetch('/api/v1/admin/change-password', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({current_password: currentPw, new_password: newPw})
-                });
-                let data = {};
-                try { data = await res.json(); } catch(e) { data = { detail: res.statusText }; }
-                if (res.ok) {
-                    showNotification('success', 'Password Updated', 'Admin Password updated successfully!');
+            container.innerHTML = matches.map((m, idx) => {
+                const isSel = idx === selectedSearchIndex ? 'selected' : '';
+                return `
+                    <div class="search-result-item ${isSel}" onclick="executeSearchResult(${idx})" data-index="${idx}">
+                        <div class="search-item-left">
+                            <i class="${m.icon} search-item-icon"></i>
+                            <div>
+                                <div class="search-item-title">${m.title}</div>
+                                <div class="search-item-sub">${m.sub}</div>
+                            </div>
+                        </div>
+                        <span class="search-item-badge">${m.type}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function executeSearchResult(index) {
+            const input = document.getElementById('global-search-input');
+            const q = (input?.value || '').toLowerCase().trim();
+            const matches = SITE_SEARCH_CATALOG.filter(item => {
+                if (!q) return true;
+                return item.title.toLowerCase().includes(q) ||
+                       item.sub.toLowerCase().includes(q) ||
+                       item.type.toLowerCase().includes(q);
+            }).slice(0, 16);
+
+            if (matches[index]) {
+                closeGlobalSearch();
+                matches[index].action();
+            }
+        }
+
+        function handleGlobalSearchKeydown(e) {
+            const items = document.querySelectorAll('.search-result-item');
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedSearchIndex = (selectedSearchIndex + 1) % items.length;
+                updateSearchSelection(items);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedSearchIndex = (selectedSearchIndex - 1 + items.length) % items.length;
+                updateSearchSelection(items);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                executeSearchResult(selectedSearchIndex);
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                closeGlobalSearch();
+            }
+        }
+
+        function updateSearchSelection(items) {
+            items.forEach((item, idx) => {
+                if (idx === selectedSearchIndex) {
+                    item.classList.add('selected');
+                    item.scrollIntoView({ block: 'nearest' });
                 } else {
-                    showNotification('error', 'Update Failed', data.detail || 'Failed to update password');
+                    item.classList.remove('selected');
                 }
-            } catch(err) {
-                showNotification('error', 'Error Changing Password', String(err));
+            });
+        }
+
+        function initGlobalSearchShortcuts() {
+            window.addEventListener('keydown', (e) => {
+                // Command+K or Ctrl+K
+                if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                    e.preventDefault();
+                    openGlobalSearch();
+                    return;
+                }
+                // Slash / when not typing in an input
+                if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+                    e.preventDefault();
+                    openGlobalSearch();
+                    return;
+                }
+                // Escape key closes search & modals
+                if (e.key === 'Escape') {
+                    closeGlobalSearch();
+                    closeUtmModal();
+                    closeChangePasswordModal();
+                }
+            });
+        }
+
+        function filterByPairAndModel(pair, model) {
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.value = pair || model || '';
+                applyFilters();
+            }
+            if (pair) {
+                const pairSel = document.getElementById('pair-select');
+                if (pairSel) { pairSel.value = pair; applyFilters(); }
+            }
+            if (model) {
+                const modelSel = document.getElementById('model-select');
+                if (modelSel) { modelSel.value = model; applyFilters(); }
             }
         }
 
@@ -6195,6 +7135,9 @@
             const copyEl = document.getElementById('copyright-year');
             if (copyEl) copyEl.textContent = new Date().getFullYear();
             initTheme();
+            initScrollProgressBar();
+            initUtmTracking();
+            initGlobalSearchShortcuts();
             updatePageTitles('tab-dashboard-jobs');
             fetchStats();
             fetchJobs();
