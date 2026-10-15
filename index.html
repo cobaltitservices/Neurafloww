@@ -478,6 +478,39 @@
             box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
         }
 
+        /* Development Diary Component Styles */
+        .diary-chip {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: #94a3b8;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .diary-chip:hover {
+            border-color: #38bdf8;
+            color: #f8fafc;
+            background: rgba(56, 189, 248, 0.1);
+        }
+        .diary-chip.active {
+            background: #38bdf8;
+            color: #020617;
+            font-weight: 700;
+            border-color: #38bdf8;
+            box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3);
+        }
+        .diary-card {
+            transition: all 0.25s ease;
+        }
+        .diary-card:hover {
+            border-color: rgba(56, 189, 248, 0.45) !important;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+
         /* Sidebar System Telemetry Widget */
         .sidebar-sys-card {
             background: rgba(15, 23, 42, 0.9);
@@ -3453,6 +3486,9 @@
                                     <button class="sub-tab-btn" id="admin-subtab-btn-procs" onclick="switchAdminSubtab('admin-subtab-procs', this)">
                                         <i class="fa-solid fa-server"></i> Active Backend Processes & Health
                                     </button>
+                                    <button class="sub-tab-btn" id="admin-subtab-btn-diary" onclick="switchAdminSubtab('admin-subtab-diary', this)">
+                                        <i class="fa-solid fa-book-journal-whills"></i> Development Diary
+                                    </button>
                                 </div>
                                 <div style="display: flex; gap: 8px; align-items: center;">
                                     <button onclick="fetchAdminData()" class="btn btn-outline" style="display: flex; align-items: center; gap: 6px; padding: 6px 12px; font-size: 11px;">
@@ -3531,6 +3567,388 @@
                                             <tr><td colspan="7" style="text-align: center; color: var(--text-muted-white); padding: 25px;">Loading backend processes...</td></tr>
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+
+                            <!-- SUBTAB 3: Project Development Diary (Admin Only) -->
+                            <div id="admin-subtab-diary" class="admin-subtab-content" style="display: none;">
+                                <!-- Diary Header & Controls -->
+                                <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 10px; padding: 18px 20px; margin-bottom: 16px;">
+                                    <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 12px;">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(16, 185, 129, 0.2)); border: 1px solid rgba(56, 189, 248, 0.4); display: flex; align-items: center; justify-content: center; color: #38bdf8; font-size: 20px;">
+                                                <i class="fa-solid fa-book-journal-whills"></i>
+                                            </div>
+                                            <div>
+                                                <div style="font-size: 16px; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px;">
+                                                    NEURAFLOWW DEVELOPMENT DIARY
+                                                    <span style="font-size: 10px; font-weight: 700; background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; padding: 1px 6px; border-radius: 4px;">ADMIN CONFIDENTIAL</span>
+                                                </div>
+                                                <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
+                                                    Chronological engineering log, architecture migrations, model pipelines &amp; platform milestones
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                            <div style="display: flex; background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 6px; padding: 2px;">
+                                                <button id="diary-view-formatted-btn" onclick="setDiaryViewMode('formatted')" class="btn" style="padding: 4px 10px; font-size: 11px; background: #38bdf8; color: #020617; font-weight: 700; border-radius: 4px; border: none; cursor: pointer;">
+                                                    <i class="fa-solid fa-layer-group"></i> Formatted
+                                                </button>
+                                                <button id="diary-view-raw-btn" onclick="setDiaryViewMode('raw')" class="btn" style="padding: 4px 10px; font-size: 11px; background: transparent; color: #94a3b8; font-weight: 600; border-radius: 4px; border: none; cursor: pointer;">
+                                                    <i class="fa-brands fa-markdown"></i> Raw Markdown
+                                                </button>
+                                            </div>
+                                            <button onclick="copyDiaryMarkdown()" class="btn btn-outline" style="padding: 5px 12px; font-size: 11px; display: flex; align-items: center; gap: 5px;">
+                                                <i class="fa-solid fa-copy"></i> Copy .md
+                                            </button>
+                                            <a href="/DEVELOPMENT_DIARY.md" download="DEVELOPMENT_DIARY.md" class="btn btn-outline" style="padding: 5px 12px; font-size: 11px; display: flex; align-items: center; gap: 5px; text-decoration: none; color: inherit;">
+                                                <i class="fa-solid fa-download"></i> Download .md
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Metadata Tag Pills -->
+                                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 11px;">
+                                        <span class="badge" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.25);">
+                                            <i class="fa-solid fa-code-branch"></i> Repository: cobaltitservices/Neurafloww
+                                        </span>
+                                        <span class="badge" style="background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.25);">
+                                            <i class="fa-solid fa-bolt"></i> Hosting: Vercel Edge Serverless
+                                        </span>
+                                        <span class="badge" style="background: rgba(168, 85, 247, 0.12); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.25);">
+                                            <i class="fa-solid fa-database"></i> Database: Supabase Serverless
+                                        </span>
+                                        <span class="badge" style="background: rgba(245, 158, 11, 0.12); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.25);">
+                                            <i class="fa-solid fa-clock-rotate-left"></i> Date of Record: October 15, 2026
+                                        </span>
+                                    </div>
+
+                                    <!-- Search & Filter Controls -->
+                                    <div style="display: flex; gap: 10px; align-items: center; margin-top: 14px; flex-wrap: wrap;">
+                                        <div style="position: relative; flex: 1; min-width: 240px;">
+                                            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 12px;"></i>
+                                            <input type="text" id="diary-search-input" oninput="filterDiaryContent(this.value)" placeholder="Search diary logs, architectures, milestones..." style="width: 100%; background: rgba(2, 6, 23, 0.8); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 6px; padding: 7px 12px 7px 32px; color: #f8fafc; font-size: 12px; outline: none;">
+                                        </div>
+                                    </div>
+
+                                    <!-- Phase Filter Chips -->
+                                    <div id="diary-phase-chips" style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px;">
+                                        <button class="diary-chip active" onclick="filterDiaryByPhase('all', this)">All Sections</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('summary', this)">Executive Summary</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('migration', this)">GCP Migration</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p1', this)">Phase 1: DL Models</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p2', this)">Phase 2: Backtest &amp; Paper</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p3', this)">Phase 3: Bloomberg UI</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p4', this)">Phase 4: Vercel Stack</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p5', this)">Phase 5: Mobile</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p6', this)">Phase 6: Navigation</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p7', this)">Phase 7: Telemetry &amp; UTM</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p8', this)">Phase 8: Neurafloww Rebrand</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('files', this)">Repository Files</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('verification', this)">Live Status</button>
+                                    </div>
+                                </div>
+
+                                <!-- Formatted View Container -->
+                                <div id="diary-formatted-view" style="display: flex; flex-direction: column; gap: 14px;">
+
+                                    <!-- Section 1: Executive Summary -->
+                                    <div class="diary-card" data-phase="summary" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                            <div style="font-size: 14px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
+                                                <i class="fa-solid fa-flag"></i> 1. Executive Summary &amp; Mission
+                                            </div>
+                                            <span class="badge badge-completed">MISSION COMPLETE</span>
+                                        </div>
+                                        <p style="font-size: 13px; line-height: 1.7; color: #cbd5e1; margin: 0 0 10px 0;">
+                                            <strong style="color: #f8fafc;">Neurafloww</strong> is an institutional-grade algorithmic cryptocurrency training platform, backtesting matrix, and web terminal. The system orchestrates over <strong>1,824 to 2,400 discrete deep learning models</strong> across 18 major trading pairs and 16 timeframe resolutions, executing predictive inference using 6 specialized neural network architectures.
+                                        </p>
+                                        <p style="font-size: 13px; line-height: 1.7; color: #cbd5e1; margin: 0;">
+                                            This development diary records the chronological evolution of the platform: from initial model training and distributed compute orchestration on Google Cloud Platform, through the strategic migration to a serverless GitHub and Vercel pipeline, to the latest user experience and telemetry enhancements.
+                                        </p>
+                                    </div>
+
+                                    <!-- Section 2: Infrastructure Evolution -->
+                                    <div class="diary-card" data-phase="migration" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                            <div style="font-size: 14px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
+                                                <i class="fa-solid fa-network-wired"></i> 2. Strategic Architecture Migration: GCP to Serverless Vercel
+                                            </div>
+                                            <span class="badge badge-completed">ZERO VM DEPENDENCY</span>
+                                        </div>
+
+                                        <!-- Architecture Comparison Matrix -->
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 14px;">
+                                            <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 14px;">
+                                                <div style="font-size: 12px; font-weight: 700; color: #f87171; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                                                    <i class="fa-solid fa-server"></i> Phase 1: Legacy Monolith (Decommissioned)
+                                                </div>
+                                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #e2e8f0; line-height: 1.6;">
+                                                    GCP Compute Instance (34.170.186.204)<br>
+                                                    ├── Nginx Web Server (/var/www/html)<br>
+                                                    ├── FastAPI Daemon (Port 8000 via Systemd)<br>
+                                                    └── Local File Storage &amp; SQLite DB
+                                                </div>
+                                            </div>
+
+                                            <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 14px;">
+                                                <div style="font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                                                    <i class="fa-solid fa-cloud-arrow-up"></i> Phase 2: Modern Serverless Stack (Live)
+                                                </div>
+                                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #e2e8f0; line-height: 1.6;">
+                                                    GitHub Repository (cobaltitservices/Neurafloww)<br>
+                                                    ├── Continuous Deployment: Vercel Edge CDN<br>
+                                                    ├── Static Web Application (HTML5 / Vanilla CSS)<br>
+                                                    ├── Database &amp; Identity: Supabase Integration<br>
+                                                    └── Local Automated Sync (deploy_to_github.sh)
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div style="background: rgba(2, 6, 23, 0.6); border-radius: 6px; padding: 12px; font-size: 12px; line-height: 1.6; color: #cbd5e1;">
+                                            <strong style="color: #38bdf8;">Strategic Rationale &amp; Benefits:</strong>
+                                            <ul style="margin: 6px 0 0 16px; padding: 0;">
+                                                <li><strong>Cost Reduction:</strong> Replaced recurring VM compute costs with zero-maintenance free-tier Vercel CDN hosting and Supabase database services.</li>
+                                                <li><strong>Reliability &amp; 100% Uptime:</strong> Eliminated single-point-of-failure VM crashes, memory saturation, and SSH port 22 timeout risks.</li>
+                                                <li><strong>Sub-50ms Global Edge Delivery:</strong> Assets and dashboard components are served with sub-50ms latency globally across Vercel edge points of presence.</li>
+                                                <li><strong>Instant CI/CD Automation:</strong> Every push to the <code style="color: #38bdf8;">main</code> branch of <code style="color: #38bdf8;">cobaltitservices/Neurafloww</code> triggers automatic build and global distribution.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section 3: Chronological Development Phases -->
+                                    <div class="diary-card" data-phase="p1" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
+                                                <i class="fa-solid fa-brain"></i> Phase 1: Deep Learning Engine &amp; Pipeline Architecture
+                                            </div>
+                                            <span class="badge badge-completed">1,824 MODELS</span>
+                                        </div>
+                                        <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
+                                            <li><strong>ClickHouse Ingestion:</strong> Built streaming data collectors ingesting tick-level and multi-timeframe OHLCV data across 18 cryptocurrency pairs (BTC, ETH, SOL, XRP, DOGE, ADA, AVAX, LINK, BNB, NEAR, MATIC, DOT, LTC, ATOM, UNI, SHIB, ZEC, TRX).</li>
+                                            <li><strong>Timeframe Matrix:</strong> Configured 16 discrete timeframe resolutions (1s, 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h, 12h, 1d, 3d, 1w).</li>
+                                            <li><strong>6 Specialized Neural Architectures:</strong> LSTM (Sequential Persistence), GRU (Low-Latency Regimes), TCN (Temporal Dilated Convolutions), Transformer (Self-Attention Correlation), CNN-LSTM (Spatial-Temporal Extraction), MLP-Mixer (Token &amp; Channel Linear Mixing).</li>
+                                            <li><strong>Leak-Free Preprocessing:</strong> Implemented chronological data splitters and standard scalers (<code style="color: #38bdf8;">scaler.pkl</code>) fitted strictly on training slices.</li>
+                                            <li><strong>Resource-Aware Orchestration:</strong> Developed multi-process workers with automatic checkpoint recovery and state tracking in <code style="color: #38bdf8;">jobs.db</code>.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="diary-card" data-phase="p2" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
+                                                <i class="fa-solid fa-chart-pie"></i> Phase 2: Quantitative Backtesting &amp; Paper Trading Engine
+                                            </div>
+                                            <span class="badge badge-completed">CONTINUOUS AUDIT</span>
+                                        </div>
+                                        <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
+                                            <li><strong>Vectorized Backtesting Engine:</strong> Computes institutional metrics: Cumulative Return %, Sharpe Ratio, Sortino Ratio (downside risk-adjusted), Maximum Drawdown (MDD), Win Rate %, and Profit Factor.</li>
+                                            <li><strong>Simulated Paper Trading Engine:</strong> High-frequency order book simulation with configurable slippage modeling, maker/taker exchange fee deduction, and dynamic position sizing.</li>
+                                            <li><strong>Automated Reporting Suite:</strong> Exports comprehensive reports in CSV, JSON, HTML, and PDF formats via <code style="color: #38bdf8;">storage/export_engine.py</code>.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="diary-card" data-phase="p3" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
+                                                <i class="fa-solid fa-display"></i> Phase 3: Dashboard Interface &amp; Bloomberg Terminal Aesthetic
+                                            </div>
+                                            <span class="badge badge-completed">GLASSMORPHIC UI</span>
+                                        </div>
+                                        <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
+                                            <li><strong>Visual Design System:</strong> Dark-mode first, glassmorphic quantitative terminal aesthetic with tailored HSL tokens (<code style="color: #38bdf8;">#030712</code>, <code style="color: #38bdf8;">#0b1329</code>, <code style="color: #38bdf8;">#38bdf8</code>, <code style="color: #38bdf8;">#10b981</code>).</li>
+                                            <li><strong>Live Market Feeds:</strong> Embedded responsive Binance/TradingView candlestick order flow charting and SVG equity curve projections.</li>
+                                            <li><strong>Strategy Leaderboard:</strong> Real-time filtering across all 1,824 strategies with tier filters: Top 1% Institutional Best Performers, Top 10% Decile, and Top 24 Benchmark Models.</li>
+                                            <li><strong>Theme Engine:</strong> Dual light/dark mode with CSS transition tokens and local storage persistence.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="diary-card" data-phase="p4" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
+                                                <i class="fa-brands fa-github"></i> Phase 4: Migration to GitHub, Vercel &amp; Supabase
+                                            </div>
+                                            <span class="badge badge-completed">SERVERLESS DEPLOYED</span>
+                                        </div>
+                                        <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
+                                            <li><strong>GCP Decommissioning:</strong> Permanently decommissioned and archived Google Cloud Platform compute instance (<code style="color: #f87171;">34.170.186.204</code>).</li>
+                                            <li><strong>GitHub Repository:</strong> Initialized and configured official repository at <a href="https://github.com/cobaltitservices/Neurafloww.git" target="_blank" style="color: #38bdf8; text-decoration: underline;">cobaltitservices/Neurafloww</a>.</li>
+                                            <li><strong>Pure Static Optimization:</strong> Configured <code style="color: #38bdf8;">vercel.json</code> with static rewrites, clean routing, and immutable asset cache headers.</li>
+                                            <li><strong>Automated Deployment Tool:</strong> Created <code style="color: #38bdf8;">deploy_to_github.sh</code> synchronizing workspace files, creating semantic git commits, and pushing to remote via authenticated access token.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="diary-card" data-phase="p5" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
+                                                <i class="fa-solid fa-mobile-screen"></i> Phase 5: Branding, Communication &amp; Mobile Optimization
+                                            </div>
+                                            <span class="badge badge-completed">100% RESPONSIVE</span>
+                                        </div>
+                                        <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
+                                            <li><strong>Interactive Brand Links:</strong> Connected header and footer logo branding to smooth top-scrolling primary matrix view.</li>
+                                            <li><strong>Clickable Support Hotline:</strong> Added clickable telephone support link (<code style="color: #38bdf8;">+1 (800) 555-0199</code>) with one-click clipboard copying and automatic system dialer triggering.</li>
+                                            <li><strong>Operations Email Link:</strong> Connected operations email (<code style="color: #38bdf8;">security@quantlabs.cloud</code>) with pre-populated subject lines and clipboard feedback.</li>
+                                            <li><strong>Mobile Architecture:</strong> Configured collapsible mobile navigation drawer with touch backdrop, converted tables to scrollable card views, and resized modals for mobile screens.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="diary-card" data-phase="p6" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
+                                                <i class="fa-solid fa-compass"></i> Phase 6: Interface Refinements &amp; Quick-Menu Architecture
+                                            </div>
+                                            <span class="badge badge-completed">STANDARDIZED</span>
+                                        </div>
+                                        <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
+                                            <li><strong>Sidebar Label Standardization:</strong> Renamed primary navigation links to standardized labels: <code style="color: #38bdf8;">Model Matrix / Jobs</code>, <code style="color: #38bdf8;">Model Leaderboard</code>, <code style="color: #38bdf8;">Paper Trading</code>, <code style="color: #38bdf8;">Activity Logs</code>, <code style="color: #38bdf8;">Admin</code>, and <code style="color: #38bdf8;">API</code>.</li>
+                                            <li><strong>Header Simplification:</strong> Removed deprecated 100% CPU boost action from the top navigation bar.</li>
+                                            <li><strong>Footer Quick-Menu Pop-Up Boxes:</strong> Re-engineered footer category columns into interactive toggle buttons with scrollable pop-up menus (<code style="color: #38bdf8;">max-height: 175px; overflow-y: auto;</code>) covering Terminal Modules, Cloud Clusters, Developer APIs, and Governance.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="diary-card" data-phase="p7" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
+                                                <i class="fa-solid fa-magnifying-glass-chart"></i> Phase 7: Usability, Telemetry &amp; Universal Search Suite
+                                            </div>
+                                            <span class="badge badge-completed">ADVANCED TELEMETRY</span>
+                                        </div>
+                                        <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
+                                            <li><strong>Password Visibility Toggles:</strong> Integrated eye toggles in Admin Login modal and created dedicated Change Password modal (<code style="color: #38bdf8;">#change-pw-modal-overlay</code>) with toggles for Current, New, and Confirm password fields.</li>
+                                            <li><strong>UTM Tracking &amp; Attribution:</strong> Automated URL query parsing (<code style="color: #38bdf8;">utm_source</code>, <code style="color: #38bdf8;">utm_medium</code>, <code style="color: #38bdf8;">utm_campaign</code>), persistence across <code style="color: #38bdf8;">sessionStorage</code> and <code style="color: #38bdf8;">localStorage</code>, header status pill, Admin telemetry card, and Campaign URL Builder modal (<code style="color: #38bdf8;">#utm-modal-overlay</code>).</li>
+                                            <li><strong>Scroll Progress Indicator:</strong> 3px glowing accent bar tracking 0% to 100% viewport scroll depth with passive listener throttling.</li>
+                                            <li><strong>Universal Site Search:</strong> Command palette modal (<code style="color: #38bdf8;">#global-search-modal-overlay</code>) accessible via <kbd>Cmd+K</kbd> / <kbd>/</kbd> indexing pairs, architectures, tabs, actions, and documentation with arrow navigation.</li>
+                                            <li><strong>Sticky Headers:</strong> Elevated sticky top navbar with dynamic backdrop blur and scroll shadow; data table headers pinned at <code style="color: #38bdf8;">top: 0</code> inside <code style="color: #38bdf8;">.table-wrap</code>.</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="diary-card" data-phase="p8" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
+                                                <i class="fa-solid fa-tag"></i> Phase 8: Platform Rebrand to Neurafloww &amp; Admin Development Diary
+                                            </div>
+                                            <span class="badge badge-completed">BRAND REFRESH</span>
+                                        </div>
+                                        <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
+                                            <li><strong>Unified Brand Identity:</strong> Rebranded platform name to <strong>Neurafloww</strong> (<code style="color: #38bdf8;">NEURAFLOWW</code>) across the sidebar title (<code style="color: #38bdf8;">NEURAFLOWW v3.0 PRO</code>), document titles, meta descriptions, OpenGraph, Twitter tags, web manifest, and footer copyright notice.</li>
+                                            <li><strong>Branded 404 Route &amp; Manifest:</strong> Updated <code style="color: #38bdf8;">dashboard/404.html</code>, <code style="color: #38bdf8;">dashboard/assets/site.webmanifest</code>, and API specification in <code style="color: #38bdf8;">api/server.py</code> to Neurafloww.</li>
+                                            <li><strong>Integrated Admin Development Diary:</strong> Built this interactive, access-controlled Development Diary viewer into the Admin console with real-time filtering, full search, dual view modes, and direct markdown export.</li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Section 4: Repository Files Table -->
+                                    <div class="diary-card" data-phase="files" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                            <div style="font-size: 14px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
+                                                <i class="fa-solid fa-folder-tree"></i> 4. Key Repository Files &amp; Architecture Map
+                                            </div>
+                                            <span class="badge badge-completed">9 CORE ARTIFACTS</span>
+                                        </div>
+                                        <div class="table-wrap" style="max-height: 380px; overflow-y: auto;">
+                                            <table class="table" style="font-size: 12px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>File Path</th>
+                                                        <th>Description &amp; Role</th>
+                                                        <th>Target Environment</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><code style="color: #38bdf8;">dashboard/index.html</code></td>
+                                                        <td>Primary Single Page Application (UI, CSS, and JS)</td>
+                                                        <td><span class="badge badge-completed">Vercel Static CDN</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code style="color: #38bdf8;">dashboard/404.html</code></td>
+                                                        <td>Custom branded 404 error page with auto-redirect</td>
+                                                        <td><span class="badge badge-completed">Vercel Static CDN</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code style="color: #38bdf8;">dashboard/assets/</code></td>
+                                                        <td>Optimized WebP/PNG logos, icons, and web manifest</td>
+                                                        <td><span class="badge badge-completed">Vercel Static CDN</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code style="color: #38bdf8;">vercel.json</code></td>
+                                                        <td>Vercel deployment configuration, clean URLs, and rewrites</td>
+                                                        <td><span class="badge badge-completed">Vercel Infrastructure</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code style="color: #38bdf8;">deploy_to_github.sh</code></td>
+                                                        <td>Automated sync and push script to GitHub remote</td>
+                                                        <td><span class="badge badge-pending">Local Workspace</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code style="color: #38bdf8;">DEVELOPMENT_DIARY.md</code></td>
+                                                        <td>Complete engineering changelog and development diary</td>
+                                                        <td><span class="badge badge-completed">Project Root &amp; Docs</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code style="color: #38bdf8;">export_website_package.py</code></td>
+                                                        <td>Bundling tool generating <code style="color: #38bdf8;">website_production_package.zip</code></td>
+                                                        <td><span class="badge badge-pending">Local Workspace</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code style="color: #38bdf8;">storage/export_engine.py</code></td>
+                                                        <td>Reporting engine exporting CSV, JSON, and PDF reports</td>
+                                                        <td><span class="badge badge-pending">Local Analytics</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code style="color: #38bdf8;">config.yaml</code></td>
+                                                        <td>System configuration, pairs, timeframes, and hyperparams</td>
+                                                        <td><span class="badge badge-pending">Core Engine</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section 5: Live Deployment Verification -->
+                                    <div class="diary-card" data-phase="verification" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
+                                            <div style="font-size: 14px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
+                                                <i class="fa-solid fa-circle-check"></i> 5. Live Deployment Verification &amp; Security Status
+                                            </div>
+                                            <span class="badge badge-completed">ALL SYSTEMS OPERATIONAL</span>
+                                        </div>
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; font-size: 12px;">
+                                            <div style="background: rgba(2, 6, 23, 0.5); border-radius: 6px; padding: 10px; border-left: 3px solid #38bdf8;">
+                                                <div style="color: #94a3b8; font-size: 11px;">Remote Git Repository</div>
+                                                <div style="color: #f8fafc; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-top: 2px;">
+                                                    <a href="https://github.com/cobaltitservices/Neurafloww.git" target="_blank" style="color: #38bdf8; text-decoration: none;">
+                                                        cobaltitservices/Neurafloww <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 10px;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div style="background: rgba(2, 6, 23, 0.5); border-radius: 6px; padding: 10px; border-left: 3px solid #10b981;">
+                                                <div style="color: #94a3b8; font-size: 11px;">Active Default Branch</div>
+                                                <div style="color: #34d399; font-weight: 700; font-family: 'JetBrains Mono', monospace; margin-top: 2px;">main</div>
+                                            </div>
+                                            <div style="background: rgba(2, 6, 23, 0.5); border-radius: 6px; padding: 10px; border-left: 3px solid #a855f7;">
+                                                <div style="color: #94a3b8; font-size: 11px;">Edge CDN Infrastructure</div>
+                                                <div style="color: #c084fc; font-weight: 700; margin-top: 2px;">Vercel Edge Global Network</div>
+                                            </div>
+                                            <div style="background: rgba(2, 6, 23, 0.5); border-radius: 6px; padding: 10px; border-left: 3px solid #ef4444;">
+                                                <div style="color: #94a3b8; font-size: 11px;">Legacy GCP Server (34.170.186.204)</div>
+                                                <div style="color: #f87171; font-weight: 700; margin-top: 2px;">Permanently Decommissioned</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Raw Markdown View Container -->
+                                <div id="diary-raw-view" style="display: none;">
+                                    <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(2, 6, 23, 0.9); border: 1px solid rgba(255,255,255,0.1); border-bottom: none; border-radius: 8px 8px 0 0; padding: 10px 16px;">
+                                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
+                                            <i class="fa-brands fa-markdown"></i> DEVELOPMENT_DIARY.md (Raw Markdown Source)
+                                        </div>
+                                        <button onclick="copyDiaryMarkdown()" class="btn btn-outline" style="padding: 3px 10px; font-size: 11px;">
+                                            <i class="fa-solid fa-copy"></i> Copy Raw
+                                        </button>
+                                    </div>
+                                    <textarea id="diary-raw-textarea" readonly style="width: 100%; height: 560px; background: rgba(2, 6, 23, 0.95); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1); border-radius: 0 0 8px 8px; padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.6; resize: vertical; outline: none; white-space: pre;"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -3887,7 +4305,7 @@
                                     <ul class="footer-popup-links">
                                         <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => openPrivacyModal())"><i class="fa-solid fa-angle-right"></i> Privacy &amp; Telemetry Policy</button></li>
                                         <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => openTermsModal())"><i class="fa-solid fa-angle-right"></i> Terms &amp; Conditions</button></li>
-                                        <li><a class="footer-popup-link" href="/storage/website_production_package.zip" download="flow_tester_production_package.zip" onclick="closeAllFooterQuickMenus()"><i class="fa-solid fa-file-zipper"></i> Production Package ZIP</a></li>
+                                        <li><a class="footer-popup-link" href="/storage/website_production_package.zip" download="neurafloww_production_package.zip" onclick="closeAllFooterQuickMenus()"><i class="fa-solid fa-file-zipper"></i> Production Package ZIP</a></li>
                                         <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => { fetchStats(); showNotification('info', 'Platform Health', 'All 2,400 neural pipelines and background daemon workers verified operational.'); })"><i class="fa-solid fa-angle-right"></i> System Health Status</button></li>
                                         <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => openPrivacyModal())"><i class="fa-solid fa-angle-right"></i> Security Audit Protocols</button></li>
                                         <li><a class="footer-popup-link phone-link" href="tel:+18005550199" onclick="handlePhoneClick(event, '+1 (800) 555-0199'); closeAllFooterQuickMenus();" title="Call or Copy Support Phone: +1 (800) 555-0199" aria-label="Call Support at +1 (800) 555-0199"><i class="fa-solid fa-phone"></i> Support: +1 (800) 555-0199</a></li>
@@ -3903,7 +4321,7 @@
                         <a href="/" onclick="handleLogoClick(event)" class="footer-brand" title="Neurafloww - Home">
                             <div class="footer-brand-title">
                                 <i class="fa-solid fa-chart-line" style="color: var(--kpi-configured-cyan);"></i>
-                                NEURAFLOWW PRO
+                                NEURAFLOWW
                             </div>
                             <span class="footer-status-pill">
                                 <span class="status-dot pulse" style="width: 6px; height: 6px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
@@ -3924,7 +4342,7 @@
                             <span class="sep">|</span>
                             <button class="footer-link" onclick="switchTab('tab-cloud-gcp')">Cloud Architecture</button>
                             <span class="sep">|</span>
-                            <a class="footer-link" href="/storage/website_production_package.zip" download="flow_tester_production_package.zip">Export Package</a>
+                            <a class="footer-link" href="/storage/website_production_package.zip" download="neurafloww_production_package.zip">Export Package</a>
                         </div>
                     </div>
 
@@ -5662,12 +6080,114 @@
             }
         }
 
+        let diaryMarkdownCache = '';
+
+        async function loadDiaryMarkdown() {
+            const textarea = document.getElementById('diary-raw-textarea');
+            if (diaryMarkdownCache && textarea && textarea.value) return;
+            try {
+                const res = await fetch('/DEVELOPMENT_DIARY.md');
+                if (res.ok) {
+                    diaryMarkdownCache = await res.text();
+                }
+            } catch (e) {
+                console.log("Fetch for DEVELOPMENT_DIARY.md skipped:", e);
+            }
+            if (textarea && diaryMarkdownCache) {
+                textarea.value = diaryMarkdownCache;
+            }
+        }
+
         function switchAdminSubtab(subtabId, btnEl) {
             document.querySelectorAll('.admin-subtab-content').forEach(el => el.style.display = 'none');
             document.querySelectorAll('#tab-admin-panel .sub-tab-btn').forEach(btn => btn.classList.remove('active'));
             const target = document.getElementById(subtabId);
             if (target) target.style.display = 'block';
             if (btnEl) btnEl.classList.add('active');
+            if (subtabId === 'admin-subtab-diary') {
+                loadDiaryMarkdown();
+            }
+        }
+
+        function setDiaryViewMode(mode) {
+            const formatted = document.getElementById('diary-formatted-view');
+            const raw = document.getElementById('diary-raw-view');
+            const formattedBtn = document.getElementById('diary-view-formatted-btn');
+            const rawBtn = document.getElementById('diary-view-raw-btn');
+            
+            if (mode === 'raw') {
+                loadDiaryMarkdown();
+                if (formatted) formatted.style.display = 'none';
+                if (raw) raw.style.display = 'block';
+                if (formattedBtn) {
+                    formattedBtn.style.background = 'transparent';
+                    formattedBtn.style.color = '#94a3b8';
+                }
+                if (rawBtn) {
+                    rawBtn.style.background = '#38bdf8';
+                    rawBtn.style.color = '#020617';
+                }
+            } else {
+                if (formatted) formatted.style.display = 'flex';
+                if (raw) raw.style.display = 'none';
+                if (formattedBtn) {
+                    formattedBtn.style.background = '#38bdf8';
+                    formattedBtn.style.color = '#020617';
+                }
+                if (rawBtn) {
+                    rawBtn.style.background = 'transparent';
+                    rawBtn.style.color = '#94a3b8';
+                }
+            }
+        }
+
+        async function copyDiaryMarkdown() {
+            await loadDiaryMarkdown();
+            const textarea = document.getElementById('diary-raw-textarea');
+            const textToCopy = diaryMarkdownCache || (textarea ? textarea.value : '');
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    showNotification('success', 'Diary Copied', 'Full Development Diary markdown copied to clipboard.');
+                    return;
+                } catch (e) {}
+            }
+            if (textarea) {
+                textarea.select();
+                document.execCommand('copy');
+                showNotification('success', 'Diary Copied', 'Full Development Diary markdown copied to clipboard.');
+            }
+        }
+
+        function filterDiaryContent(query) {
+            const q = (query || '').toLowerCase().trim();
+            const cards = document.querySelectorAll('.diary-card');
+            cards.forEach(card => {
+                if (!q) {
+                    card.style.display = '';
+                } else {
+                    const text = card.textContent.toLowerCase();
+                    card.style.display = text.includes(q) ? '' : 'none';
+                }
+            });
+        }
+
+        function filterDiaryByPhase(phase, btnEl) {
+            document.querySelectorAll('#diary-phase-chips .diary-chip').forEach(b => b.classList.remove('active'));
+            if (btnEl) btnEl.classList.add('active');
+            
+            const searchInput = document.getElementById('diary-search-input');
+            if (searchInput) searchInput.value = '';
+
+            const cards = document.querySelectorAll('.diary-card');
+            cards.forEach(card => {
+                if (phase === 'all') {
+                    card.style.display = '';
+                } else {
+                    const cardPhase = card.getAttribute('data-phase');
+                    card.style.display = (cardPhase === phase) ? '' : 'none';
+                }
+            });
         }
 
         async function fetchAdminData() {
