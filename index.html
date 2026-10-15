@@ -1229,61 +1229,235 @@
         }
 
         .footer-col {
+            position: relative;
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .footer-col-title {
+        .footer-col-title-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            border-radius: 8px;
+            padding: 12px 14px;
+            color: var(--text-cool-white);
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--text-cool-white);
+            letter-spacing: 0.6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        .footer-col-title-btn:hover,
+        .footer-col-title-btn.active {
+            background: rgba(2, 132, 199, 0.18);
+            border-color: #38bdf8;
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(2, 132, 199, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .footer-col-title-btn .f-title-left {
             display: flex;
             align-items: center;
             gap: 8px;
-            margin: 0;
         }
 
-        .footer-col-title i {
+        .footer-col-title-btn .f-title-left i {
             color: var(--ticker-cool-blue);
-            font-size: 12px;
+            font-size: 13px;
         }
 
-        .footer-links {
+        .footer-col-title-btn .f-title-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 10px;
+            color: var(--text-muted-white);
+            text-transform: none;
+            letter-spacing: normal;
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.16);
+            padding: 2px 8px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .footer-col-title-btn.active .f-title-badge,
+        .footer-col-title-btn:hover .f-title-badge {
+            background: rgba(56, 189, 248, 0.2);
+            color: #38bdf8;
+            border-color: #38bdf8;
+        }
+
+        .footer-col-title-btn .f-chevron {
+            font-size: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .footer-col-title-btn.active .f-chevron {
+            transform: rotate(180deg);
+        }
+
+        /* Pop-up Box Quick Menu */
+        .footer-popup-box {
+            display: none;
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 0;
+            width: max-content;
+            min-width: 260px;
+            max-width: 330px;
+            background: #090e18;
+            background: rgba(9, 14, 24, 0.96);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(56, 189, 248, 0.32);
+            border-radius: 10px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 24px rgba(56, 189, 248, 0.16);
+            z-index: 1000;
+            overflow: hidden;
+            animation: footerPopupAnim 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .footer-popup-box.footer-popup-right {
+            left: auto;
+            right: 0;
+        }
+
+        .footer-popup-box.active {
+            display: block;
+        }
+
+        @keyframes footerPopupAnim {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer-popup-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: rgba(18, 28, 48, 0.85);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-cool-white);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-popup-header .popup-header-title {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .footer-popup-header .popup-header-title i {
+            color: var(--kpi-configured-cyan);
+            font-size: 11px;
+        }
+
+        .footer-popup-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted-white);
+            cursor: pointer;
+            padding: 4px;
+            font-size: 13px;
+            line-height: 1;
+            border-radius: 4px;
+            transition: color 0.15s ease, background 0.15s ease;
+        }
+
+        .footer-popup-close-btn:hover {
+            color: #ffffff;
+            background: rgba(244, 63, 94, 0.2);
+        }
+
+        .footer-popup-scroll {
+            max-height: 175px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 6px;
+        }
+
+        .footer-popup-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .footer-popup-scroll::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 4px;
+        }
+
+        .footer-popup-scroll::-webkit-scrollbar-thumb {
+            background: #0284c7;
+            border-radius: 4px;
+        }
+
+        .footer-popup-scroll::-webkit-scrollbar-thumb:hover {
+            background: #38bdf8;
+        }
+
+        .footer-popup-links {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 3px;
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        .footer-link {
-            font-size: 12px;
-            color: var(--text-muted-white);
-            text-decoration: none;
-            cursor: pointer;
-            transition: color 0.18s ease, transform 0.18s ease;
-            display: inline-flex;
+        .footer-popup-link {
+            width: 100%;
+            display: flex;
             align-items: center;
-            gap: 6px;
-            width: fit-content;
+            gap: 8px;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-cool-white);
             background: transparent;
             border: none;
-            padding: 0;
-            line-height: 1.4;
+            border-radius: 6px;
+            text-align: left;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            box-sizing: border-box;
         }
 
-        .footer-link:hover {
-            color: var(--ticker-cool-blue);
-            transform: translateX(3px);
+        .footer-popup-link:hover {
+            background: rgba(56, 189, 248, 0.14);
+            color: #38bdf8;
+            transform: translateX(4px);
         }
 
-        .footer-link i {
-            font-size: 9px;
-            opacity: 0.7;
+        .footer-popup-link i {
+            font-size: 10px;
+            color: #38bdf8;
+            opacity: 0.85;
+            transition: transform 0.15s ease;
+        }
+
+        .footer-popup-link:hover i {
+            transform: translateX(2px);
+            opacity: 1;
         }
 
         .phone-link {
@@ -1679,7 +1853,15 @@
             }
             .footer-grid {
                 grid-template-columns: 1fr;
-                gap: 22px;
+                gap: 12px;
+            }
+            .footer-popup-box {
+                position: absolute !important;
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+                min-width: 0 !important;
+                max-width: 100% !important;
             }
             .footer-meta-bar {
                 flex-direction: column;
@@ -3202,64 +3384,140 @@
 
                 <!-- ENTERPRISE QUANTITATIVE TERMINAL FOOTER -->
                 <footer class="app-footer">
-                    <!-- 4-Column Navigation Directory -->
+                    <!-- 4-Column Navigation Directory with Quick Menu Pop-Up Boxes -->
                     <div class="footer-grid">
                         <!-- Column 1: Terminal Modules -->
-                        <div class="footer-col">
-                            <h4 class="footer-col-title">
-                                <i class="fa-solid fa-terminal"></i> Terminal Modules
-                            </h4>
-                            <ul class="footer-links">
-                                <li><button class="footer-link" onclick="switchTab('tab-dashboard-jobs')"><i class="fa-solid fa-angle-right"></i> Training Matrix</button></li>
-                                <li><button class="footer-link" onclick="switchTab('tab-leaderboard')"><i class="fa-solid fa-angle-right"></i> Strategy Leaderboard</button></li>
-                                <li><button class="footer-link" onclick="switchTab('tab-binance-chart')"><i class="fa-solid fa-angle-right"></i> Binance Live Graph</button></li>
-                                <li><button class="footer-link" onclick="switchTab('tab-paper-trading-engine')"><i class="fa-solid fa-angle-right"></i> Top 24 Paper Trading</button></li>
-                                <li><button class="footer-link" onclick="switchTab('tab-paper-trading-telemetry')"><i class="fa-solid fa-angle-right"></i> Executed Fills Audit</button></li>
-                            </ul>
+                        <div class="footer-col" id="col-footer-modules">
+                            <button type="button" class="footer-col-title-btn" id="footer-btn-modules" onclick="toggleFooterQuickMenu('modules', event)" aria-expanded="false" title="Click to view Terminal Modules quick menu">
+                                <span class="f-title-left">
+                                    <i class="fa-solid fa-terminal"></i>
+                                    <span>Terminal Modules</span>
+                                </span>
+                                <span class="f-title-badge">5 Links <i class="fa-solid fa-chevron-up f-chevron"></i></span>
+                            </button>
+                            
+                            <!-- Pop-up Box Quick Menu -->
+                            <div class="footer-popup-box" id="footer-popup-modules" onclick="event.stopPropagation()">
+                                <div class="footer-popup-header">
+                                    <div class="popup-header-title">
+                                        <i class="fa-solid fa-terminal"></i>
+                                        <span>Terminal Modules</span>
+                                    </div>
+                                    <button type="button" class="footer-popup-close-btn" onclick="closeAllFooterQuickMenus(event)" title="Close Quick Menu">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                                <div class="footer-popup-scroll">
+                                    <ul class="footer-popup-links">
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-dashboard-jobs'))"><i class="fa-solid fa-angle-right"></i> Training Matrix</button></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-leaderboard'))"><i class="fa-solid fa-angle-right"></i> Strategy Leaderboard</button></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-binance-chart'))"><i class="fa-solid fa-angle-right"></i> Binance Live Graph</button></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-paper-trading-engine'))"><i class="fa-solid fa-angle-right"></i> Top 24 Paper Trading</button></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-paper-trading-telemetry'))"><i class="fa-solid fa-angle-right"></i> Executed Fills Audit</button></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Column 2: Cloud Infrastructure -->
-                        <div class="footer-col">
-                            <h4 class="footer-col-title">
-                                <i class="fa-solid fa-cloud"></i> Cloud Clusters
-                            </h4>
-                            <ul class="footer-links">
-                                <li><button class="footer-link" onclick="switchTab('tab-cloud-gcp')"><i class="fa-solid fa-angle-right"></i> Google Cloud Platform</button></li>
-                                <li><button class="footer-link" onclick="switchTab('tab-cloud-aws')"><i class="fa-solid fa-angle-right"></i> AWS Node Cluster</button></li>
-                                <li><button class="footer-link" onclick="switchTab('tab-cloud-azure')"><i class="fa-solid fa-angle-right"></i> Microsoft Azure VM Sets</button></li>
-                                <li><button class="footer-link" onclick="switchTab('tab-cloud-oci')"><i class="fa-solid fa-angle-right"></i> Oracle OCI Compute</button></li>
-                                <li><button class="footer-link" onclick="switchTab('tab-dashboard-metrics')"><i class="fa-solid fa-angle-right"></i> Cluster Resource KPI</button></li>
-                            </ul>
+                        <div class="footer-col" id="col-footer-cloud">
+                            <button type="button" class="footer-col-title-btn" id="footer-btn-cloud" onclick="toggleFooterQuickMenu('cloud', event)" aria-expanded="false" title="Click to view Cloud Clusters quick menu">
+                                <span class="f-title-left">
+                                    <i class="fa-solid fa-cloud"></i>
+                                    <span>Cloud Clusters</span>
+                                </span>
+                                <span class="f-title-badge">5 Links <i class="fa-solid fa-chevron-up f-chevron"></i></span>
+                            </button>
+                            
+                            <!-- Pop-up Box Quick Menu -->
+                            <div class="footer-popup-box" id="footer-popup-cloud" onclick="event.stopPropagation()">
+                                <div class="footer-popup-header">
+                                    <div class="popup-header-title">
+                                        <i class="fa-solid fa-cloud"></i>
+                                        <span>Cloud Clusters</span>
+                                    </div>
+                                    <button type="button" class="footer-popup-close-btn" onclick="closeAllFooterQuickMenus(event)" title="Close Quick Menu">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                                <div class="footer-popup-scroll">
+                                    <ul class="footer-popup-links">
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-cloud-gcp'))"><i class="fa-solid fa-angle-right"></i> Google Cloud Platform</button></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-cloud-aws'))"><i class="fa-solid fa-angle-right"></i> AWS Node Cluster</button></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-cloud-azure'))"><i class="fa-solid fa-angle-right"></i> Microsoft Azure VM Sets</button></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-cloud-oci'))"><i class="fa-solid fa-angle-right"></i> Oracle OCI Compute</button></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-dashboard-metrics'))"><i class="fa-solid fa-angle-right"></i> Cluster Resource KPI</button></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Column 3: Developer & APIs -->
-                        <div class="footer-col">
-                            <h4 class="footer-col-title">
-                                <i class="fa-solid fa-code"></i> Developer &amp; APIs
-                            </h4>
-                            <ul class="footer-links">
-                                <li><button class="footer-link" onclick="switchTab('tab-swagger')"><i class="fa-solid fa-angle-right"></i> Embedded Swagger UI</button></li>
-                                <li><a class="footer-link" href="/docs" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Standalone OpenAPI Docs</a></li>
-                                <li><button class="footer-link" onclick="switchTab('tab-system-logs-stream')"><i class="fa-solid fa-angle-right"></i> Activity Logs</button></li>
-                                <li><button class="footer-link" onclick="switchTab('tab-system-logs-gcp')"><i class="fa-solid fa-angle-right"></i> GCP Cloud Audit Logs</button></li>
-                                <li><button class="footer-link" onclick="switchTab('tab-admin-panel')"><i class="fa-solid fa-angle-right"></i> Admin Governance</button></li>
-                            </ul>
+                        <div class="footer-col" id="col-footer-dev">
+                            <button type="button" class="footer-col-title-btn" id="footer-btn-dev" onclick="toggleFooterQuickMenu('dev', event)" aria-expanded="false" title="Click to view Developer & APIs quick menu">
+                                <span class="f-title-left">
+                                    <i class="fa-solid fa-code"></i>
+                                    <span>Developer &amp; APIs</span>
+                                </span>
+                                <span class="f-title-badge">5 Links <i class="fa-solid fa-chevron-up f-chevron"></i></span>
+                            </button>
+                            
+                            <!-- Pop-up Box Quick Menu -->
+                            <div class="footer-popup-box" id="footer-popup-dev" onclick="event.stopPropagation()">
+                                <div class="footer-popup-header">
+                                    <div class="popup-header-title">
+                                        <i class="fa-solid fa-code"></i>
+                                        <span>Developer &amp; APIs</span>
+                                    </div>
+                                    <button type="button" class="footer-popup-close-btn" onclick="closeAllFooterQuickMenus(event)" title="Close Quick Menu">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                                <div class="footer-popup-scroll">
+                                    <ul class="footer-popup-links">
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-swagger'))"><i class="fa-solid fa-angle-right"></i> Embedded Swagger UI</button></li>
+                                        <li><a class="footer-popup-link" href="/docs" target="_blank" rel="noopener" onclick="closeAllFooterQuickMenus()"><i class="fa-solid fa-arrow-up-right-from-square"></i> Standalone OpenAPI Docs</a></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-system-logs-stream'))"><i class="fa-solid fa-angle-right"></i> Activity Logs</button></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-system-logs-gcp'))"><i class="fa-solid fa-angle-right"></i> GCP Cloud Audit Logs</button></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => switchTab('tab-admin-panel'))"><i class="fa-solid fa-angle-right"></i> Admin Governance</button></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- Column 4: Governance & Legal -->
-                        <div class="footer-col">
-                            <h4 class="footer-col-title">
-                                <i class="fa-solid fa-shield-halved"></i> Governance &amp; Legal
-                            </h4>
-                            <ul class="footer-links">
-                                <li><button class="footer-link" onclick="openPrivacyModal()"><i class="fa-solid fa-angle-right"></i> Privacy &amp; Telemetry Policy</button></li>
-                                <li><button class="footer-link" onclick="openTermsModal()"><i class="fa-solid fa-angle-right"></i> Terms &amp; Conditions</button></li>
-                                <li><a class="footer-link" href="/storage/website_production_package.zip" download="flow_tester_production_package.zip"><i class="fa-solid fa-file-zipper"></i> Production Package ZIP</a></li>
-                                <li><button class="footer-link" onclick="fetchStats(); showNotification('info', 'Platform Health', 'All 2,400 neural pipelines and background daemon workers verified operational.')"><i class="fa-solid fa-angle-right"></i> System Health Status</button></li>
-                                <li><button class="footer-link" onclick="openPrivacyModal()"><i class="fa-solid fa-angle-right"></i> Security Audit Protocols</button></li>
-                                <li><a class="footer-link phone-link" href="tel:+18005550199" onclick="handlePhoneClick(event, '+1 (800) 555-0199')" title="Call or Copy Support Phone: +1 (800) 555-0199" aria-label="Call Support at +1 (800) 555-0199"><i class="fa-solid fa-phone"></i> Support: +1 (800) 555-0199</a></li>
-                                <li><a class="footer-link email-link" href="mailto:security@quantlabs.cloud" onclick="handleEmailClick(event, 'security@quantlabs.cloud')" title="Email Support: security@quantlabs.cloud" aria-label="Email Support at security@quantlabs.cloud"><i class="fa-solid fa-envelope"></i> Email: security@quantlabs.cloud</a></li>
-                            </ul>
+                        <div class="footer-col" id="col-footer-legal">
+                            <button type="button" class="footer-col-title-btn" id="footer-btn-legal" onclick="toggleFooterQuickMenu('legal', event)" aria-expanded="false" title="Click to view Governance & Legal quick menu">
+                                <span class="f-title-left">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                    <span>Governance &amp; Legal</span>
+                                </span>
+                                <span class="f-title-badge">7 Links <i class="fa-solid fa-chevron-up f-chevron"></i></span>
+                            </button>
+                            
+                            <!-- Pop-up Box Quick Menu -->
+                            <div class="footer-popup-box footer-popup-right" id="footer-popup-legal" onclick="event.stopPropagation()">
+                                <div class="footer-popup-header">
+                                    <div class="popup-header-title">
+                                        <i class="fa-solid fa-shield-halved"></i>
+                                        <span>Governance &amp; Legal</span>
+                                    </div>
+                                    <button type="button" class="footer-popup-close-btn" onclick="closeAllFooterQuickMenus(event)" title="Close Quick Menu">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
+                                </div>
+                                <div class="footer-popup-scroll">
+                                    <ul class="footer-popup-links">
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => openPrivacyModal())"><i class="fa-solid fa-angle-right"></i> Privacy &amp; Telemetry Policy</button></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => openTermsModal())"><i class="fa-solid fa-angle-right"></i> Terms &amp; Conditions</button></li>
+                                        <li><a class="footer-popup-link" href="/storage/website_production_package.zip" download="flow_tester_production_package.zip" onclick="closeAllFooterQuickMenus()"><i class="fa-solid fa-file-zipper"></i> Production Package ZIP</a></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => { fetchStats(); showNotification('info', 'Platform Health', 'All 2,400 neural pipelines and background daemon workers verified operational.'); })"><i class="fa-solid fa-angle-right"></i> System Health Status</button></li>
+                                        <li><button type="button" class="footer-popup-link" onclick="handleQuickMenuClick(() => openPrivacyModal())"><i class="fa-solid fa-angle-right"></i> Security Audit Protocols</button></li>
+                                        <li><a class="footer-popup-link phone-link" href="tel:+18005550199" onclick="handlePhoneClick(event, '+1 (800) 555-0199'); closeAllFooterQuickMenus();" title="Call or Copy Support Phone: +1 (800) 555-0199" aria-label="Call Support at +1 (800) 555-0199"><i class="fa-solid fa-phone"></i> Support: +1 (800) 555-0199</a></li>
+                                        <li><a class="footer-popup-link email-link" href="mailto:security@quantlabs.cloud" onclick="handleEmailClick(event, 'security@quantlabs.cloud'); closeAllFooterQuickMenus();" title="Email Support: security@quantlabs.cloud" aria-label="Email Support at security@quantlabs.cloud"><i class="fa-solid fa-envelope"></i> Email: security@quantlabs.cloud</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -4032,6 +4290,52 @@
             const modal = document.getElementById('terms-conditions-modal-overlay');
             if (modal) modal.style.display = 'none';
         }
+
+        function toggleFooterQuickMenu(menuId, event) {
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            const targetBox = document.getElementById('footer-popup-' + menuId);
+            const targetBtn = document.getElementById('footer-btn-' + menuId);
+            const isCurrentlyActive = targetBox && targetBox.classList.contains('active');
+
+            closeAllFooterQuickMenus();
+
+            if (!isCurrentlyActive && targetBox && targetBtn) {
+                targetBox.classList.add('active');
+                targetBtn.classList.add('active');
+                targetBtn.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        function closeAllFooterQuickMenus(event) {
+            if (event) event.stopPropagation();
+            document.querySelectorAll('.footer-popup-box').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.footer-col-title-btn').forEach(el => {
+                el.classList.remove('active');
+                el.setAttribute('aria-expanded', 'false');
+            });
+        }
+
+        function handleQuickMenuClick(actionFn) {
+            closeAllFooterQuickMenus();
+            if (typeof actionFn === 'function') {
+                actionFn();
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.footer-col')) {
+                closeAllFooterQuickMenus();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeAllFooterQuickMenus();
+            }
+        });
 
         async function handleAdminLoginSubmit(e) {
             e.preventDefault();
