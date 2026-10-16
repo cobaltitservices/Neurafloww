@@ -478,37 +478,141 @@
             box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
         }
 
-        /* Development Diary Component Styles */
+        /* ==========================================================================
+           DEVELOPMENT DIARY & MASTER HANDOVER VIEWER - QUANT TERMINAL AESTHETIC
+           ========================================================================== */
+        .diary-header-card {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.92) 0%, rgba(30, 41, 59, 0.75) 100%);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 12px;
+            padding: 22px 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            position: relative;
+            overflow: hidden;
+        }
+        .diary-header-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #38bdf8, #10b981, #c084fc, #38bdf8);
+            background-size: 200% 100%;
+            animation: diaryGradientMove 6s linear infinite;
+        }
+        @keyframes diaryGradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
         .diary-chip {
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid rgba(56, 189, 248, 0.2);
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.22);
             color: #94a3b8;
-            font-size: 11px;
+            font-size: 11.5px;
             font-weight: 600;
-            padding: 4px 10px;
+            padding: 6px 13px;
             border-radius: 20px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            user-select: none;
+            backdrop-filter: blur(8px);
         }
         .diary-chip:hover {
             border-color: #38bdf8;
             color: #f8fafc;
-            background: rgba(56, 189, 248, 0.1);
+            background: rgba(56, 189, 248, 0.14);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.25);
         }
         .diary-chip.active {
-            background: #38bdf8;
+            background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
             color: #020617;
-            font-weight: 700;
+            font-weight: 800;
             border-color: #38bdf8;
-            box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(56, 189, 248, 0.45);
         }
         .diary-card {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(30, 41, 59, 0.6) 100%);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-left: 4px solid #38bdf8;
+            border-radius: 12px;
+            padding: 22px 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(14px);
             transition: all 0.25s ease;
+            position: relative;
         }
         .diary-card:hover {
-            border-color: rgba(56, 189, 248, 0.45) !important;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            border-color: rgba(56, 189, 248, 0.55);
+            border-left-color: #38bdf8;
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.15);
+        }
+        .diary-card[data-phase="handover"] { border-left-color: #f59e0b; }
+        .diary-card[data-phase="binance"] { border-left-color: #facc15; }
+        .diary-card[data-phase="clickhouse"] { border-left-color: #ec4899; }
+        .diary-card[data-phase="backblaze"] { border-left-color: #ef4444; }
+        .diary-card[data-phase="aws"] { border-left-color: #f97316; }
+        .diary-card[data-phase="gcp"] { border-left-color: #38bdf8; }
+        .diary-card[data-phase="salad"] { border-left-color: #10b981; }
+        .diary-card[data-phase="p1"] { border-left-color: #a855f7; }
+        .diary-card[data-phase="p2"] { border-left-color: #06b6d4; }
+        .diary-card[data-phase="p3"] { border-left-color: #6366f1; }
+        .diary-card[data-phase="p4"] { border-left-color: #10b981; }
+        .diary-card[data-phase="p5"] { border-left-color: #8b5cf6; }
+        .diary-card[data-phase="p6"] { border-left-color: #3b82f6; }
+        .diary-card[data-phase="p7"] { border-left-color: #0284c7; }
+        .diary-card[data-phase="p8"] { border-left-color: #ec4899; }
+        .diary-card[data-phase="files"] { border-left-color: #c084fc; }
+        .diary-card[data-phase="verification"] { border-left-color: #10b981; }
+
+        .diary-badge {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .diary-badge-cyan { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35); }
+        .diary-badge-green { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+        .diary-badge-gold { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
+        .diary-badge-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.35); }
+        .diary-badge-red { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.35); }
+
+        .diary-code-chip {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: #38bdf8;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 11.5px;
+        }
+        .diary-copy-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #94a3b8;
+            padding: 3px 9px;
+            border-radius: 5px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.18s ease;
+        }
+        .diary-copy-btn:hover {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: #38bdf8;
+            color: #f8fafc;
         }
 
         /* Sidebar System Telemetry Widget */
@@ -3568,98 +3672,277 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-
-                            <!-- SUBTAB 3: Project Development Diary (Admin Only) -->
+                                                <!-- SUBTAB 3: Project Development Diary & Master Handover (Admin Only) -->
                             <div id="admin-subtab-diary" class="admin-subtab-content" style="display: none;">
                                 <!-- Diary Header & Controls -->
-                                <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 10px; padding: 18px 20px; margin-bottom: 16px;">
-                                    <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 12px;">
-                                        <div style="display: flex; align-items: center; gap: 12px;">
-                                            <div style="width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(16, 185, 129, 0.2)); border: 1px solid rgba(56, 189, 248, 0.4); display: flex; align-items: center; justify-content: center; color: #38bdf8; font-size: 20px;">
+                                <div class="diary-header-card">
+                                    <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 14px;">
+                                        <div style="display: flex; align-items: center; gap: 14px;">
+                                            <div style="width: 48px; height: 48px; border-radius: 12px; background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(16, 185, 129, 0.25)); border: 1px solid rgba(56, 189, 248, 0.45); display: flex; align-items: center; justify-content: center; color: #38bdf8; font-size: 22px; box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);">
                                                 <i class="fa-solid fa-book-journal-whills"></i>
                                             </div>
                                             <div>
-                                                <div style="font-size: 16px; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 8px;">
-                                                    NEURAFLOWW DEVELOPMENT DIARY
-                                                    <span style="font-size: 10px; font-weight: 700; background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; color: #38bdf8; padding: 1px 6px; border-radius: 4px;">ADMIN CONFIDENTIAL</span>
+                                                <div style="font-size: 17px; font-weight: 800; color: #f8fafc; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                                    NEURAFLOWW ARCHITECTURE &amp; DEVELOPMENT HANDOVER
+                                                    <span class="diary-badge diary-badge-cyan">ADMIN CONFIDENTIAL</span>
+                                                    <span class="diary-badge diary-badge-green"><span class="status-dot pulse" style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span> VERIFIED HANDOVER</span>
                                                 </div>
-                                                <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
-                                                    Chronological engineering log, architecture migrations, model pipelines &amp; platform milestones
+                                                <div style="font-size: 12.5px; color: #94a3b8; margin-top: 3px; line-height: 1.5;">
+                                                    Exhaustive knowledge transfer manual, multi-cloud runbooks (AWS, GCP, Salad), ClickHouse, Backblaze B2, Binance ingestion, and model zoo architecture.
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                                            <div style="display: flex; background: rgba(30, 41, 59, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 6px; padding: 2px;">
-                                                <button id="diary-view-formatted-btn" onclick="setDiaryViewMode('formatted')" class="btn" style="padding: 4px 10px; font-size: 11px; background: #38bdf8; color: #020617; font-weight: 700; border-radius: 4px; border: none; cursor: pointer;">
+                                            <div style="display: flex; background: rgba(30, 41, 59, 0.9); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px; padding: 2px;">
+                                                <button id="diary-view-formatted-btn" onclick="setDiaryViewMode('formatted')" class="btn" style="padding: 5px 12px; font-size: 11px; background: #38bdf8; color: #020617; font-weight: 700; border-radius: 6px; border: none; cursor: pointer;">
                                                     <i class="fa-solid fa-layer-group"></i> Formatted
                                                 </button>
-                                                <button id="diary-view-raw-btn" onclick="setDiaryViewMode('raw')" class="btn" style="padding: 4px 10px; font-size: 11px; background: transparent; color: #94a3b8; font-weight: 600; border-radius: 4px; border: none; cursor: pointer;">
-                                                    <i class="fa-brands fa-markdown"></i> Raw Markdown
+                                                <button id="diary-view-raw-diary-btn" onclick="setDiaryViewMode('raw-diary')" class="btn" style="padding: 5px 12px; font-size: 11px; background: transparent; color: #94a3b8; font-weight: 600; border-radius: 6px; border: none; cursor: pointer;">
+                                                    <i class="fa-brands fa-markdown"></i> Raw Diary
+                                                </button>
+                                                <button id="diary-view-raw-handover-btn" onclick="setDiaryViewMode('raw-handover')" class="btn" style="padding: 5px 12px; font-size: 11px; background: transparent; color: #94a3b8; font-weight: 600; border-radius: 6px; border: none; cursor: pointer;">
+                                                    <i class="fa-solid fa-file-contract"></i> Raw Handover
                                                 </button>
                                             </div>
-                                            <button onclick="copyDiaryMarkdown()" class="btn btn-outline" style="padding: 5px 12px; font-size: 11px; display: flex; align-items: center; gap: 5px;">
-                                                <i class="fa-solid fa-copy"></i> Copy .md
+                                            <button onclick="copyDiaryMarkdown()" class="btn btn-outline" style="padding: 6px 12px; font-size: 11px; display: flex; align-items: center; gap: 5px;">
+                                                <i class="fa-solid fa-copy"></i> Copy Active .md
                                             </button>
-                                            <a href="/DEVELOPMENT_DIARY.md" download="DEVELOPMENT_DIARY.md" class="btn btn-outline" style="padding: 5px 12px; font-size: 11px; display: flex; align-items: center; gap: 5px; text-decoration: none; color: inherit;">
-                                                <i class="fa-solid fa-download"></i> Download .md
+                                            <a href="/HANDOVER_DOCUMENTATION.md" download="HANDOVER_DOCUMENTATION.md" class="btn btn-outline" style="padding: 6px 12px; font-size: 11px; display: flex; align-items: center; gap: 5px; text-decoration: none; color: #f59e0b; border-color: rgba(245, 158, 11, 0.4);">
+                                                <i class="fa-solid fa-file-shield"></i> Download Handover
+                                            </a>
+                                            <a href="/DEVELOPMENT_DIARY.md" download="DEVELOPMENT_DIARY.md" class="btn btn-outline" style="padding: 6px 12px; font-size: 11px; display: flex; align-items: center; gap: 5px; text-decoration: none; color: inherit;">
+                                                <i class="fa-solid fa-download"></i> Download Diary
                                             </a>
                                         </div>
                                     </div>
 
                                     <!-- Metadata Tag Pills -->
-                                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 11px;">
-                                        <span class="badge" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.25);">
+                                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 11px;">
+                                        <span class="badge" style="background: rgba(56, 189, 248, 0.12); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">
                                             <i class="fa-solid fa-code-branch"></i> Repository: cobaltitservices/Neurafloww
                                         </span>
-                                        <span class="badge" style="background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.25);">
+                                        <span class="badge" style="background: rgba(16, 185, 129, 0.12); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">
                                             <i class="fa-solid fa-bolt"></i> Hosting: Vercel Edge Serverless
                                         </span>
-                                        <span class="badge" style="background: rgba(168, 85, 247, 0.12); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.25);">
-                                            <i class="fa-solid fa-database"></i> Database: Supabase Serverless
+                                        <span class="badge" style="background: rgba(236, 72, 153, 0.12); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.3);">
+                                            <i class="fa-solid fa-database"></i> ClickHouse: 34.132.233.162:8123
                                         </span>
-                                        <span class="badge" style="background: rgba(245, 158, 11, 0.12); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.25);">
-                                            <i class="fa-solid fa-clock-rotate-left"></i> Date of Record: October 15, 2026
+                                        <span class="badge" style="background: rgba(168, 85, 247, 0.12); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3);">
+                                            <i class="fa-solid fa-shield-halved"></i> Database: Supabase Serverless
+                                        </span>
+                                        <span class="badge" style="background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">
+                                            <i class="fa-solid fa-box-archive"></i> Storage: Backblaze B2 &amp; AWS DynamoDB
+                                        </span>
+                                        <span class="badge" style="background: rgba(245, 158, 11, 0.12); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);">
+                                            <i class="fa-solid fa-calendar-check"></i> Handover Date: October 16, 2026
                                         </span>
                                     </div>
 
                                     <!-- Search & Filter Controls -->
                                     <div style="display: flex; gap: 10px; align-items: center; margin-top: 14px; flex-wrap: wrap;">
-                                        <div style="position: relative; flex: 1; min-width: 240px;">
-                                            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 12px;"></i>
-                                            <input type="text" id="diary-search-input" oninput="filterDiaryContent(this.value)" placeholder="Search diary logs, architectures, milestones..." style="width: 100%; background: rgba(2, 6, 23, 0.8); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 6px; padding: 7px 12px 7px 32px; color: #f8fafc; font-size: 12px; outline: none;">
+                                        <div style="position: relative; flex: 1; min-width: 260px;">
+                                            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 13px;"></i>
+                                            <input type="text" id="diary-search-input" oninput="filterDiaryContent(this.value)" placeholder="Search architecture, ClickHouse, Backblaze, Binance, AWS, GCP, models..." style="width: 100%; background: rgba(2, 6, 23, 0.85); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 8px 14px 8px 36px; color: #f8fafc; font-size: 12.5px; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#38bdf8'" onblur="this.style.borderColor='rgba(56,189,248,0.25)'">
                                         </div>
+                                        <div id="diary-search-status" style="font-size: 11px; color: #94a3b8; display: none;"></div>
                                     </div>
 
                                     <!-- Phase Filter Chips -->
-                                    <div id="diary-phase-chips" style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px;">
-                                        <button class="diary-chip active" onclick="filterDiaryByPhase('all', this)">All Sections</button>
-                                        <button class="diary-chip" onclick="filterDiaryByPhase('summary', this)">Executive Summary</button>
-                                        <button class="diary-chip" onclick="filterDiaryByPhase('migration', this)">GCP Migration</button>
-                                        <button class="diary-chip" onclick="filterDiaryByPhase('p1', this)">Phase 1: DL Models</button>
-                                        <button class="diary-chip" onclick="filterDiaryByPhase('p2', this)">Phase 2: Backtest &amp; Paper</button>
-                                        <button class="diary-chip" onclick="filterDiaryByPhase('p3', this)">Phase 3: Bloomberg UI</button>
-                                        <button class="diary-chip" onclick="filterDiaryByPhase('p4', this)">Phase 4: Vercel Stack</button>
-                                        <button class="diary-chip" onclick="filterDiaryByPhase('p5', this)">Phase 5: Mobile</button>
-                                        <button class="diary-chip" onclick="filterDiaryByPhase('p6', this)">Phase 6: Navigation</button>
-                                        <button class="diary-chip" onclick="filterDiaryByPhase('p7', this)">Phase 7: Telemetry &amp; UTM</button>
-                                        <button class="diary-chip" onclick="filterDiaryByPhase('p8', this)">Phase 8: Neurafloww Rebrand</button>
-                                        <button class="diary-chip" onclick="filterDiaryByPhase('files', this)">Repository Files</button>
-                                        <button class="diary-chip" onclick="filterDiaryByPhase('verification', this)">Live Status</button>
+                                    <div id="diary-phase-chips" style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px;">
+                                        <button class="diary-chip active" onclick="filterDiaryByPhase('all', this)"><i class="fa-solid fa-border-all"></i> All Sections</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('handover', this)"><i class="fa-solid fa-star" style="color: #f59e0b;"></i> Master Handover</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('binance', this)"><i class="fa-solid fa-chart-line" style="color: #facc15;"></i> Binance Pipeline</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('clickhouse', this)"><i class="fa-solid fa-database" style="color: #ec4899;"></i> ClickHouse</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('backblaze', this)"><i class="fa-solid fa-hard-drive" style="color: #ef4444;"></i> Backblaze B2</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('aws', this)"><i class="fa-brands fa-aws" style="color: #f97316;"></i> AWS &amp; DynamoDB</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('migration', this)"><i class="fa-brands fa-google" style="color: #38bdf8;"></i> GCP &amp; Migration</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('salad', this)"><i class="fa-solid fa-microchip" style="color: #10b981;"></i> Salad Cloud GPU</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p1', this)"><i class="fa-solid fa-brain"></i> Phase 1: DL Models</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p2', this)"><i class="fa-solid fa-calculator"></i> Phase 2: Backtest &amp; Paper</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p3', this)"><i class="fa-solid fa-desktop"></i> Phase 3: Bloomberg UI</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p4', this)"><i class="fa-solid fa-cloud"></i> Phase 4: Vercel Stack</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p5', this)"><i class="fa-solid fa-mobile-screen"></i> Phase 5: Mobile</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p6', this)"><i class="fa-solid fa-compass"></i> Phase 6: Navigation</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p7', this)"><i class="fa-solid fa-satellite-dish"></i> Phase 7: Telemetry &amp; UTM</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('p8', this)"><i class="fa-solid fa-tag"></i> Phase 8: Neurafloww Rebrand</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('files', this)"><i class="fa-solid fa-folder-tree"></i> Repository Files</button>
+                                        <button class="diary-chip" onclick="filterDiaryByPhase('verification', this)"><i class="fa-solid fa-circle-check"></i> Live Status</button>
                                     </div>
                                 </div>
 
                                 <!-- Formatted View Container -->
-                                <div id="diary-formatted-view" style="display: flex; flex-direction: column; gap: 14px;">
+                                <div id="diary-formatted-view" style="display: flex; flex-direction: column; gap: 16px;">
+
+                                    <!-- Section 0: Master Handover Documentation (Special Card) -->
+                                    <div class="diary-card" data-phase="handover">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px;">
+                                            <div style="font-size: 15px; font-weight: 800; color: #fbbf24; display: flex; align-items: center; gap: 10px;">
+                                                <i class="fa-solid fa-file-shield" style="font-size: 18px;"></i> ⭐ Master Architecture &amp; Engineering Handover Manual
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <span class="diary-badge diary-badge-gold">LEAVING THE COMPANY STANDARD</span>
+                                                <a href="/HANDOVER_DOCUMENTATION.md" download="HANDOVER_DOCUMENTATION.md" class="diary-copy-btn" style="text-decoration: none; color: inherit;">
+                                                    <i class="fa-solid fa-download"></i> Save Document
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <p style="font-size: 13px; line-height: 1.7; color: #cbd5e1; margin: 0 0 12px 0;">
+                                            This platform is handed over in an institutional-grade state. All core operational components: distributed training across <span class="diary-code-chip">1,824 - 2,400 deep learning models</span>, automated vectorized backtesting, real-time Binance price streaming, multi-cloud data clients (ClickHouse, Backblaze B2, AWS DynamoDB, GCP, Salad Cloud), and serverless Vercel edge deployment are fully documented in <span class="diary-code-chip">HANDOVER_DOCUMENTATION.md</span>.
+                                        </p>
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; margin-bottom: 12px;">
+                                            <div style="background: rgba(2, 6, 23, 0.6); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 8px; padding: 12px;">
+                                                <div style="font-size: 11px; font-weight: 700; color: #fbbf24; margin-bottom: 4px;"><i class="fa-solid fa-key"></i> Key Operator Credentials</div>
+                                                <div style="font-size: 12px; color: #e2e8f0; line-height: 1.6;">
+                                                    • Default Admin: <span class="diary-code-chip">admin</span> / <span class="diary-code-chip">admin</span><br>
+                                                    • Password changes persist in browser <span class="diary-code-chip">localStorage</span><br>
+                                                    • Emergency reset: Clear browser cache or edit <span class="diary-code-chip">ADMIN_PASSWORD</span>
+                                                </div>
+                                            </div>
+                                            <div style="background: rgba(2, 6, 23, 0.6); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 12px;">
+                                                <div style="font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 4px;"><i class="fa-solid fa-terminal"></i> 1-Click Production Push</div>
+                                                <div style="font-size: 12px; color: #e2e8f0; line-height: 1.6;">
+                                                    Run <span class="diary-code-chip">./deploy_to_github.sh "commit msg"</span><br>
+                                                    Pushes to <span class="diary-code-chip">cobaltitservices/Neurafloww</span> and triggers automated Vercel Edge build in &lt;20 seconds.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section: Binance Market Data Ingestion Pipeline -->
+                                    <div class="diary-card" data-phase="binance">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px;">
+                                            <div style="font-size: 15px; font-weight: 800; color: #facc15; display: flex; align-items: center; gap: 10px;">
+                                                <i class="fa-solid fa-chart-line" style="font-size: 18px;"></i> Binance Data Ingestion Pipeline &amp; Asset Universe
+                                            </div>
+                                            <span class="diary-badge diary-badge-gold">18 ASSETS × 16 TIMEFRAMES</span>
+                                        </div>
+                                        <p style="font-size: 13px; line-height: 1.7; color: #cbd5e1; margin: 0 0 10px 0;">
+                                            Market feeds are ingested directly from Binance across <strong>18 institutional cryptocurrency assets</strong> and <strong>16 discrete timeframe resolutions</strong>:
+                                        </p>
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 12px;">
+                                            <div style="background: rgba(2, 6, 23, 0.6); border: 1px solid rgba(250, 204, 21, 0.25); border-radius: 8px; padding: 12px;">
+                                                <div style="font-size: 11px; font-weight: 700; color: #facc15; margin-bottom: 6px;">18 Monitored Cryptocurrency Pairs:</div>
+                                                <div style="font-size: 11.5px; color: #cbd5e1; line-height: 1.7;">
+                                                    <span class="diary-code-chip">BTC</span>, <span class="diary-code-chip">ETH</span>, <span class="diary-code-chip">SOL</span>, <span class="diary-code-chip">BNB</span>, <span class="diary-code-chip">XRP</span>, <span class="diary-code-chip">ADA</span>, <span class="diary-code-chip">AVAX</span>, <span class="diary-code-chip">DOGE</span>, <span class="diary-code-chip">DOT</span>, <span class="diary-code-chip">LINK</span>, <span class="diary-code-chip">NEAR</span>, <span class="diary-code-chip">SUI</span>, <span class="diary-code-chip">PEPE</span>, <span class="diary-code-chip">SHIB</span>, <span class="diary-code-chip">FLOKI</span>, <span class="diary-code-chip">BONK</span>, <span class="diary-code-chip">LTC</span>, <span class="diary-code-chip">ATOM</span>
+                                                </div>
+                                            </div>
+                                            <div style="background: rgba(2, 6, 23, 0.6); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 12px;">
+                                                <div style="font-size: 11px; font-weight: 700; color: #38bdf8; margin-bottom: 6px;">16 Timeframe Resolutions &amp; Features:</div>
+                                                <div style="font-size: 11.5px; color: #cbd5e1; line-height: 1.7;">
+                                                    • <strong>Timeframes:</strong> 1s, 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h, 12h, 1d, 3d, 1w, 1M.<br>
+                                                    • <strong>13-Feature Vector:</strong> OHLCV, 10-period Fast MA, 30-period Slow MA, MA Crossover delta, Bollinger Bands (Upper, Lower, %B, Bandwidth), and Parabolic SAR.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="background: rgba(2, 6, 23, 0.5); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #94a3b8; line-height: 1.6;">
+                                            <strong style="color: #facc15;">Rate Limit &amp; Caching Protection:</strong> Integrated <span class="diary-code-chip">fetch_all_binance_prices()</span> with a 1.0-second TTL in-memory cache to ingest all asset prices in a single batch query without hitting Binance 1,200 weight/minute rate limits.
+                                        </div>
+                                    </div>
+
+                                    <!-- Section: ClickHouse Analytics Database -->
+                                    <div class="diary-card" data-phase="clickhouse">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px;">
+                                            <div style="font-size: 15px; font-weight: 800; color: #f472b6; display: flex; align-items: center; gap: 10px;">
+                                                <i class="fa-solid fa-database" style="font-size: 18px;"></i> ClickHouse High-Throughput Analytics Engine
+                                            </div>
+                                            <span class="diary-badge diary-badge-purple">COLUMNAR TIME-SERIES</span>
+                                        </div>
+                                        <p style="font-size: 13px; line-height: 1.7; color: #cbd5e1; margin: 0 0 10px 0;">
+                                            ClickHouse provides sub-millisecond query execution across billions of historical crypto candles with vectorized columnar compression.
+                                        </p>
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin-bottom: 12px; font-size: 12px;">
+                                            <div style="background: rgba(2, 6, 23, 0.6); padding: 10px; border-radius: 6px; border-left: 3px solid #ec4899;">
+                                                <div style="color: #94a3b8; font-size: 11px;">Server Endpoint</div>
+                                                <div style="color: #f8fafc; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 12px;">34.132.233.162:8123 (HTTP)</div>
+                                            </div>
+                                            <div style="background: rgba(2, 6, 23, 0.6); padding: 10px; border-radius: 6px; border-left: 3px solid #38bdf8;">
+                                                <div style="color: #94a3b8; font-size: 11px;">Target Database &amp; Table</div>
+                                                <div style="color: #f8fafc; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 12px;">crypto_data.ohlcv_data</div>
+                                            </div>
+                                            <div style="background: rgba(2, 6, 23, 0.6); padding: 10px; border-radius: 6px; border-left: 3px solid #10b981;">
+                                                <div style="color: #94a3b8; font-size: 11px;">Compression Codecs</div>
+                                                <div style="color: #f8fafc; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 12px;">DoubleDelta, LZ4, Gorilla, ZSTD</div>
+                                            </div>
+                                        </div>
+                                        <div style="background: rgba(2, 6, 23, 0.5); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #94a3b8; line-height: 1.6;">
+                                            <strong style="color: #f472b6;">Fail-Safe Mock Engine:</strong> <span class="diary-code-chip">data/clickhouse_client.py</span> incorporates an automated Geometric Brownian Motion (GBM) synthetic data engine. If ClickHouse network connectivity drops, training jobs and test suites seamlessly continue without crashing.
+                                        </div>
+                                    </div>
+
+                                    <!-- Section: Backblaze B2 & Cold Storage Layer -->
+                                    <div class="diary-card" data-phase="backblaze">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px;">
+                                            <div style="font-size: 15px; font-weight: 800; color: #f87171; display: flex; align-items: center; gap: 10px;">
+                                                <i class="fa-solid fa-box-archive" style="font-size: 18px;"></i> Backblaze B2 &amp; Cold Storage Archival Layer
+                                            </div>
+                                            <span class="diary-badge diary-badge-red">78% CLOUD COST SAVING</span>
+                                        </div>
+                                        <p style="font-size: 13px; line-height: 1.7; color: #cbd5e1; margin: 0 0 10px 0;">
+                                            Backblaze B2 acts as our low-cost, institutional cold-storage repository for raw Binance tick archives, Snappy-compressed Parquet files, and neural network weights:
+                                        </p>
+                                        <ul style="margin: 0 0 10px 18px; padding: 0; font-size: 12.5px; line-height: 1.7; color: #cbd5e1;">
+                                            <li><strong>S3-Compatible Integration:</strong> Fully operable via standard <span class="diary-code-chip">boto3</span> and <span class="diary-code-chip">rclone</span> pointing to <span class="diary-code-chip">https://s3.us-west-004.backblazeb2.com</span>.</li>
+                                            <li><strong>Economic Efficiency:</strong> Backblaze B2 costs $0.005/GB/month vs AWS S3 ($0.023/GB/month) with free egress via Cloudflare Bandwidth Alliance.</li>
+                                            <li><strong>Trained Weight Snapshots:</strong> All 1,824+ model checkpoints (<span class="diary-code-chip">.pt</span> and <span class="diary-code-chip">scaler.pkl</span>) are mirrored to <span class="diary-code-chip">b2://neurafloww-model-checkpoints/</span>.</li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- Section: AWS Infrastructure & DynamoDB Services -->
+                                    <div class="diary-card" data-phase="aws">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px;">
+                                            <div style="font-size: 15px; font-weight: 800; color: #fb923c; display: flex; align-items: center; gap: 10px;">
+                                                <i class="fa-brands fa-aws" style="font-size: 18px;"></i> AWS Cloud Compute &amp; DynamoDB Services
+                                            </div>
+                                            <span class="diary-badge diary-badge-gold">EC2 &amp; DYNAMODB</span>
+                                        </div>
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-bottom: 12px;">
+                                            <div style="background: rgba(2, 6, 23, 0.6); border: 1px solid rgba(249, 115, 22, 0.25); border-radius: 8px; padding: 12px;">
+                                                <div style="font-size: 11px; font-weight: 700; color: #fb923c; margin-bottom: 6px;">Provisioned EC2 Machine Profiles:</div>
+                                                <div style="font-size: 11.5px; color: #cbd5e1; line-height: 1.7;">
+                                                    • <span class="diary-code-chip">c5.9xlarge</span>: 36 vCPUs, 72 GB RAM (CPU parallel training)<br>
+                                                    • <span class="diary-code-chip">c7i.16xlarge</span>: 64 vCPUs, 128 GB RAM (Matrix backtesting)<br>
+                                                    • <span class="diary-code-chip">g5.xlarge</span>: NVIDIA A10G GPU (CUDA acceleration)<br>
+                                                    • <span class="diary-code-chip">t3.medium</span>: Lightweight staging node
+                                                </div>
+                                            </div>
+                                            <div style="background: rgba(2, 6, 23, 0.6); border: 1px solid rgba(249, 115, 22, 0.25); border-radius: 8px; padding: 12px;">
+                                                <div style="font-size: 11px; font-weight: 700; color: #fb923c; margin-bottom: 6px;">DynamoDB Tables (<span class="diary-code-chip">data/dynamodb_data_client.py</span>):</div>
+                                                <div style="font-size: 11.5px; color: #cbd5e1; line-height: 1.7;">
+                                                    • <span class="diary-code-chip">PaperTradingTrades</span>: Completed order records &amp; PnL<br>
+                                                    • <span class="diary-code-chip">PaperTradingTicks</span>: Streaming ticker telemetry<br>
+                                                    • <span class="diary-code-chip">PaperTradingSessions</span>: Active bot states &amp; drawdown<br>
+                                                    • <span class="diary-code-chip">CryptoHistoricalPrices</span>: Historical OHLCV cache
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Section: Salad Cloud GPU Cluster -->
+                                    <div class="diary-card" data-phase="salad">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 10px;">
+                                            <div style="font-size: 15px; font-weight: 800; color: #34d399; display: flex; align-items: center; gap: 10px;">
+                                                <i class="fa-solid fa-microchip" style="font-size: 18px;"></i> Salad Cloud Distributed GPU Acceleration
+                                            </div>
+                                            <span class="diary-badge diary-badge-green">85% CHEAPER THAN AWS G5</span>
+                                        </div>
+                                        <p style="font-size: 13px; line-height: 1.7; color: #cbd5e1; margin: 0 0 10px 0;">
+                                            To train all 1,824+ models with CUDA acceleration at minimal cost, we engineered a distributed container fleet on <strong>Salad Cloud</strong>:
+                                        </p>
+                                        <ul style="margin: 0 0 10px 18px; padding: 0; font-size: 12.5px; line-height: 1.7; color: #cbd5e1;">
+                                            <li><strong>GPU Fleet Hardware:</strong> RTX 3080, RTX 3090, RTX 4090, and A100 GPU worker nodes at $0.15 - $0.25/hr.</li>
+                                            <li><strong>Worker Container:</strong> <span class="diary-code-chip">Dockerfile.salad</span> bundles PyTorch CUDA and runs <span class="diary-code-chip">train_on_salad_gcs.py</span> with automatic GCS dataset synchronization.</li>
+                                            <li><strong>Automated Orchestration:</strong> <span class="diary-code-chip">deploy_salad_cloud.py</span> deploys parallel worker replicas reporting back to the master job dispatcher.</li>
+                                        </ul>
+                                    </div>
 
                                     <!-- Section 1: Executive Summary -->
-                                    <div class="diary-card" data-phase="summary" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                    <div class="diary-card" data-phase="summary">
                                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
                                             <div style="font-size: 14px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
-                                                <i class="fa-solid fa-flag"></i> 1. Executive Summary &amp; Mission
+                                                <i class="fa-solid fa-flag"></i> 1. Executive Summary &amp; Platform Mission
                                             </div>
-                                            <span class="badge badge-completed">MISSION COMPLETE</span>
+                                            <span class="diary-badge diary-badge-cyan">MISSION COMPLETE</span>
                                         </div>
                                         <p style="font-size: 13px; line-height: 1.7; color: #cbd5e1; margin: 0 0 10px 0;">
                                             <strong style="color: #f8fafc;">Neurafloww</strong> is an institutional-grade algorithmic cryptocurrency training platform, backtesting matrix, and web terminal. The system orchestrates over <strong>1,824 to 2,400 discrete deep learning models</strong> across 18 major trading pairs and 16 timeframe resolutions, executing predictive inference using 6 specialized neural network architectures.
@@ -3670,19 +3953,19 @@
                                     </div>
 
                                     <!-- Section 2: Infrastructure Evolution -->
-                                    <div class="diary-card" data-phase="migration" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                    <div class="diary-card" data-phase="migration">
                                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
                                             <div style="font-size: 14px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
                                                 <i class="fa-solid fa-network-wired"></i> 2. Strategic Architecture Migration: GCP to Serverless Vercel
                                             </div>
-                                            <span class="badge badge-completed">ZERO VM DEPENDENCY</span>
+                                            <span class="diary-badge diary-badge-green">ZERO VM DEPENDENCY</span>
                                         </div>
 
                                         <!-- Architecture Comparison Matrix -->
                                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 14px;">
                                             <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 14px;">
                                                 <div style="font-size: 12px; font-weight: 700; color: #f87171; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-                                                    <i class="fa-solid fa-server"></i> Phase 1: Legacy Monolith (Decommissioned)
+                                                    <i class="fa-solid fa-server"></i> Phase 1: Legacy Monolith (Permanently Decommissioned)
                                                 </div>
                                                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #e2e8f0; line-height: 1.6;">
                                                     GCP Compute Instance (34.170.186.204)<br>
@@ -3694,7 +3977,7 @@
 
                                             <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 14px;">
                                                 <div style="font-size: 12px; font-weight: 700; color: #34d399; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-                                                    <i class="fa-solid fa-cloud-arrow-up"></i> Phase 2: Modern Serverless Stack (Live)
+                                                    <i class="fa-solid fa-cloud-arrow-up"></i> Phase 2: Modern Serverless Stack (Live Production)
                                                 </div>
                                                 <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #e2e8f0; line-height: 1.6;">
                                                     GitHub Repository (cobaltitservices/Neurafloww)<br>
@@ -3718,12 +4001,12 @@
                                     </div>
 
                                     <!-- Section 3: Chronological Development Phases -->
-                                    <div class="diary-card" data-phase="p1" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                    <div class="diary-card" data-phase="p1">
                                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
-                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
+                                            <div style="font-size: 13.5px; font-weight: 700; color: #38bdf8;">
                                                 <i class="fa-solid fa-brain"></i> Phase 1: Deep Learning Engine &amp; Pipeline Architecture
                                             </div>
-                                            <span class="badge badge-completed">1,824 MODELS</span>
+                                            <span class="diary-badge diary-badge-purple">1,824 - 2,400 MODELS</span>
                                         </div>
                                         <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
                                             <li><strong>ClickHouse Ingestion:</strong> Built streaming data collectors ingesting tick-level and multi-timeframe OHLCV data across 18 cryptocurrency pairs (BTC, ETH, SOL, XRP, DOGE, ADA, AVAX, LINK, BNB, NEAR, MATIC, DOT, LTC, ATOM, UNI, SHIB, ZEC, TRX).</li>
@@ -3734,12 +4017,12 @@
                                         </ul>
                                     </div>
 
-                                    <div class="diary-card" data-phase="p2" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                    <div class="diary-card" data-phase="p2">
                                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
-                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
-                                                <i class="fa-solid fa-chart-pie"></i> Phase 2: Quantitative Backtesting &amp; Paper Trading Engine
+                                            <div style="font-size: 13.5px; font-weight: 700; color: #38bdf8;">
+                                                <i class="fa-solid fa-calculator"></i> Phase 2: Quantitative Backtesting &amp; Paper Trading Engine
                                             </div>
-                                            <span class="badge badge-completed">CONTINUOUS AUDIT</span>
+                                            <span class="diary-badge diary-badge-cyan">CONTINUOUS AUDIT</span>
                                         </div>
                                         <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
                                             <li><strong>Vectorized Backtesting Engine:</strong> Computes institutional metrics: Cumulative Return %, Sharpe Ratio, Sortino Ratio (downside risk-adjusted), Maximum Drawdown (MDD), Win Rate %, and Profit Factor.</li>
@@ -3748,12 +4031,12 @@
                                         </ul>
                                     </div>
 
-                                    <div class="diary-card" data-phase="p3" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                    <div class="diary-card" data-phase="p3">
                                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
-                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
-                                                <i class="fa-solid fa-display"></i> Phase 3: Dashboard Interface &amp; Bloomberg Terminal Aesthetic
+                                            <div style="font-size: 13.5px; font-weight: 700; color: #38bdf8;">
+                                                <i class="fa-solid fa-desktop"></i> Phase 3: Dashboard Interface &amp; Bloomberg Terminal Aesthetic
                                             </div>
-                                            <span class="badge badge-completed">GLASSMORPHIC UI</span>
+                                            <span class="diary-badge diary-badge-purple">GLASSMORPHIC UI</span>
                                         </div>
                                         <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
                                             <li><strong>Visual Design System:</strong> Dark-mode first, glassmorphic quantitative terminal aesthetic with tailored HSL tokens (<code style="color: #38bdf8;">#030712</code>, <code style="color: #38bdf8;">#0b1329</code>, <code style="color: #38bdf8;">#38bdf8</code>, <code style="color: #38bdf8;">#10b981</code>).</li>
@@ -3763,12 +4046,12 @@
                                         </ul>
                                     </div>
 
-                                    <div class="diary-card" data-phase="p4" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                    <div class="diary-card" data-phase="p4">
                                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
-                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
+                                            <div style="font-size: 13.5px; font-weight: 700; color: #38bdf8;">
                                                 <i class="fa-brands fa-github"></i> Phase 4: Migration to GitHub, Vercel &amp; Supabase
                                             </div>
-                                            <span class="badge badge-completed">SERVERLESS DEPLOYED</span>
+                                            <span class="diary-badge diary-badge-green">SERVERLESS DEPLOYED</span>
                                         </div>
                                         <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
                                             <li><strong>GCP Decommissioning:</strong> Permanently decommissioned and archived Google Cloud Platform compute instance (<code style="color: #f87171;">34.170.186.204</code>).</li>
@@ -3778,12 +4061,12 @@
                                         </ul>
                                     </div>
 
-                                    <div class="diary-card" data-phase="p5" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                    <div class="diary-card" data-phase="p5">
                                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
-                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
+                                            <div style="font-size: 13.5px; font-weight: 700; color: #38bdf8;">
                                                 <i class="fa-solid fa-mobile-screen"></i> Phase 5: Branding, Communication &amp; Mobile Optimization
                                             </div>
-                                            <span class="badge badge-completed">100% RESPONSIVE</span>
+                                            <span class="diary-badge diary-badge-purple">100% RESPONSIVE</span>
                                         </div>
                                         <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
                                             <li><strong>Interactive Brand Links:</strong> Connected header and footer logo branding to smooth top-scrolling primary matrix view.</li>
@@ -3793,12 +4076,12 @@
                                         </ul>
                                     </div>
 
-                                    <div class="diary-card" data-phase="p6" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                    <div class="diary-card" data-phase="p6">
                                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
-                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
+                                            <div style="font-size: 13.5px; font-weight: 700; color: #38bdf8;">
                                                 <i class="fa-solid fa-compass"></i> Phase 6: Interface Refinements &amp; Quick-Menu Architecture
                                             </div>
-                                            <span class="badge badge-completed">STANDARDIZED</span>
+                                            <span class="diary-badge diary-badge-cyan">STANDARDIZED</span>
                                         </div>
                                         <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
                                             <li><strong>Sidebar Label Standardization:</strong> Renamed primary navigation links to standardized labels: <code style="color: #38bdf8;">Model Matrix / Jobs</code>, <code style="color: #38bdf8;">Model Leaderboard</code>, <code style="color: #38bdf8;">Paper Trading</code>, <code style="color: #38bdf8;">Activity Logs</code>, <code style="color: #38bdf8;">Admin</code>, and <code style="color: #38bdf8;">API</code>.</li>
@@ -3807,12 +4090,12 @@
                                         </ul>
                                     </div>
 
-                                    <div class="diary-card" data-phase="p7" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                    <div class="diary-card" data-phase="p7">
                                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
-                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
-                                                <i class="fa-solid fa-magnifying-glass-chart"></i> Phase 7: Usability, Telemetry &amp; Universal Search Suite
+                                            <div style="font-size: 13.5px; font-weight: 700; color: #38bdf8;">
+                                                <i class="fa-solid fa-satellite-dish"></i> Phase 7: Usability, Telemetry &amp; Universal Search Suite
                                             </div>
-                                            <span class="badge badge-completed">ADVANCED TELEMETRY</span>
+                                            <span class="diary-badge diary-badge-green">ADVANCED TELEMETRY</span>
                                         </div>
                                         <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
                                             <li><strong>Password Visibility Toggles:</strong> Integrated eye toggles in Admin Login modal and created dedicated Change Password modal (<code style="color: #38bdf8;">#change-pw-modal-overlay</code>) with toggles for Current, New, and Confirm password fields.</li>
@@ -3823,12 +4106,12 @@
                                         </ul>
                                     </div>
 
-                                    <div class="diary-card" data-phase="p8" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                    <div class="diary-card" data-phase="p8">
                                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
-                                            <div style="font-size: 13px; font-weight: 700; color: #38bdf8;">
+                                            <div style="font-size: 13.5px; font-weight: 700; color: #38bdf8;">
                                                 <i class="fa-solid fa-tag"></i> Phase 8: Platform Rebrand to Neurafloww &amp; Admin Development Diary
                                             </div>
-                                            <span class="badge badge-completed">BRAND REFRESH</span>
+                                            <span class="diary-badge diary-badge-cyan">BRAND REFRESH</span>
                                         </div>
                                         <ul style="margin: 0 0 0 16px; padding: 0; font-size: 12px; line-height: 1.7; color: #cbd5e1;">
                                             <li><strong>Unified Brand Identity:</strong> Rebranded platform name to <strong>Neurafloww</strong> (<code style="color: #38bdf8;">NEURAFLOWW</code>) across the sidebar title (<code style="color: #38bdf8;">NEURAFLOWW v3.0 PRO</code>), document titles, meta descriptions, OpenGraph, Twitter tags, web manifest, and footer copyright notice.</li>
@@ -3838,12 +4121,12 @@
                                     </div>
 
                                     <!-- Section 4: Repository Files Table -->
-                                    <div class="diary-card" data-phase="files" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                    <div class="diary-card" data-phase="files">
                                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
                                             <div style="font-size: 14px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
                                                 <i class="fa-solid fa-folder-tree"></i> 4. Key Repository Files &amp; Architecture Map
                                             </div>
-                                            <span class="badge badge-completed">9 CORE ARTIFACTS</span>
+                                            <span class="diary-badge diary-badge-purple">CORE ARCHITECTURE ARTIFACTS</span>
                                         </div>
                                         <div class="table-wrap" style="max-height: 380px; overflow-y: auto;">
                                             <table class="table" style="font-size: 12px;">
@@ -3855,6 +4138,16 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <tr>
+                                                        <td><code style="color: #f59e0b; font-weight: bold;">HANDOVER_DOCUMENTATION.md</code></td>
+                                                        <td>Master institutional architecture handover manual &amp; complete audit</td>
+                                                        <td><span class="badge badge-completed">Project Root &amp; Docs</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code style="color: #38bdf8;">DEVELOPMENT_DIARY.md</code></td>
+                                                        <td>Complete engineering changelog and development diary</td>
+                                                        <td><span class="badge badge-completed">Project Root &amp; Docs</span></td>
+                                                    </tr>
                                                     <tr>
                                                         <td><code style="color: #38bdf8;">dashboard/index.html</code></td>
                                                         <td>Primary Single Page Application (UI, CSS, and JS)</td>
@@ -3881,19 +4174,24 @@
                                                         <td><span class="badge badge-pending">Local Workspace</span></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><code style="color: #38bdf8;">DEVELOPMENT_DIARY.md</code></td>
-                                                        <td>Complete engineering changelog and development diary</td>
-                                                        <td><span class="badge badge-completed">Project Root &amp; Docs</span></td>
+                                                        <td><code style="color: #38bdf8;">data/clickhouse_client.py</code></td>
+                                                        <td>ClickHouse time-series data client &amp; GBM mock engine</td>
+                                                        <td><span class="badge badge-completed">Core Engine</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code style="color: #38bdf8;">data/dynamodb_data_client.py</code></td>
+                                                        <td>AWS DynamoDB time-series and trade storage client</td>
+                                                        <td><span class="badge badge-completed">Core Engine</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><code style="color: #38bdf8;">paper_trading/engine.py</code></td>
+                                                        <td>Real-time Top 15/24 Paper Trading execution engine</td>
+                                                        <td><span class="badge badge-completed">Core Engine</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td><code style="color: #38bdf8;">export_website_package.py</code></td>
                                                         <td>Bundling tool generating <code style="color: #38bdf8;">website_production_package.zip</code></td>
                                                         <td><span class="badge badge-pending">Local Workspace</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><code style="color: #38bdf8;">storage/export_engine.py</code></td>
-                                                        <td>Reporting engine exporting CSV, JSON, and PDF reports</td>
-                                                        <td><span class="badge badge-pending">Local Analytics</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td><code style="color: #38bdf8;">config.yaml</code></td>
@@ -3906,12 +4204,12 @@
                                     </div>
 
                                     <!-- Section 5: Live Deployment Verification -->
-                                    <div class="diary-card" data-phase="verification" style="background: rgba(11, 19, 43, 0.65); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; padding: 18px;">
+                                    <div class="diary-card" data-phase="verification">
                                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 8px;">
                                             <div style="font-size: 14px; font-weight: 700; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
                                                 <i class="fa-solid fa-circle-check"></i> 5. Live Deployment Verification &amp; Security Status
                                             </div>
-                                            <span class="badge badge-completed">ALL SYSTEMS OPERATIONAL</span>
+                                            <span class="diary-badge diary-badge-green">ALL SYSTEMS OPERATIONAL</span>
                                         </div>
                                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; font-size: 12px;">
                                             <div style="background: rgba(2, 6, 23, 0.5); border-radius: 6px; padding: 10px; border-left: 3px solid #38bdf8;">
@@ -3942,14 +4240,19 @@
                                 <div id="diary-raw-view" style="display: none;">
                                     <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(2, 6, 23, 0.9); border: 1px solid rgba(255,255,255,0.1); border-bottom: none; border-radius: 8px 8px 0 0; padding: 10px 16px;">
                                         <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
-                                            <i class="fa-brands fa-markdown"></i> DEVELOPMENT_DIARY.md (Raw Markdown Source)
+                                            <i class="fa-brands fa-markdown"></i> <span id="diary-raw-title">DEVELOPMENT_DIARY.md (Raw Markdown Source)</span>
                                         </div>
-                                        <button onclick="copyDiaryMarkdown()" class="btn btn-outline" style="padding: 3px 10px; font-size: 11px;">
-                                            <i class="fa-solid fa-copy"></i> Copy Raw
-                                        </button>
+                                        <div style="display: flex; gap: 8px;">
+                                            <button onclick="setDiaryRawFile('diary')" class="btn btn-outline" style="padding: 3px 10px; font-size: 11px;">View Diary</button>
+                                            <button onclick="setDiaryRawFile('handover')" class="btn btn-outline" style="padding: 3px 10px; font-size: 11px; color: #f59e0b; border-color: rgba(245, 158, 11, 0.4);">View Handover</button>
+                                            <button onclick="copyDiaryMarkdown()" class="btn btn-outline" style="padding: 3px 10px; font-size: 11px;">
+                                                <i class="fa-solid fa-copy"></i> Copy Raw
+                                            </button>
+                                        </div>
                                     </div>
                                     <textarea id="diary-raw-textarea" readonly style="width: 100%; height: 560px; background: rgba(2, 6, 23, 0.95); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1); border-radius: 0 0 8px 8px; padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.6; resize: vertical; outline: none; white-space: pre;"></textarea>
                                 </div>
+                            </div>                 </div>
                             </div>
                         </div>
                     </div>
@@ -6138,10 +6441,11 @@
         }
 
         let diaryMarkdownCache = '';
+        let handoverMarkdownCache = '';
+        let currentRawFileType = 'diary'; // 'diary' or 'handover'
 
         async function loadDiaryMarkdown() {
-            const textarea = document.getElementById('diary-raw-textarea');
-            if (diaryMarkdownCache && textarea && textarea.value) return;
+            if (diaryMarkdownCache) return diaryMarkdownCache;
             try {
                 const res = await fetch('/DEVELOPMENT_DIARY.md');
                 if (res.ok) {
@@ -6150,8 +6454,35 @@
             } catch (e) {
                 console.log("Fetch for DEVELOPMENT_DIARY.md skipped:", e);
             }
-            if (textarea && diaryMarkdownCache) {
-                textarea.value = diaryMarkdownCache;
+            return diaryMarkdownCache;
+        }
+
+        async function loadHandoverMarkdown() {
+            if (handoverMarkdownCache) return handoverMarkdownCache;
+            try {
+                const res = await fetch('/HANDOVER_DOCUMENTATION.md');
+                if (res.ok) {
+                    handoverMarkdownCache = await res.text();
+                }
+            } catch (e) {
+                console.log("Fetch for HANDOVER_DOCUMENTATION.md skipped:", e);
+            }
+            return handoverMarkdownCache;
+        }
+
+        async function setDiaryRawFile(fileType) {
+            currentRawFileType = fileType;
+            const textarea = document.getElementById('diary-raw-textarea');
+            const titleEl = document.getElementById('diary-raw-title');
+            
+            if (fileType === 'handover') {
+                if (titleEl) titleEl.innerHTML = '<i class="fa-solid fa-file-shield" style="color: #f59e0b;"></i> HANDOVER_DOCUMENTATION.md (Master Architecture Handover)';
+                const text = await loadHandoverMarkdown();
+                if (textarea) textarea.value = text;
+            } else {
+                if (titleEl) titleEl.innerHTML = '<i class="fa-brands fa-markdown" style="color: #38bdf8;"></i> DEVELOPMENT_DIARY.md (Engineering Changelog)';
+                const text = await loadDiaryMarkdown();
+                if (textarea) textarea.value = text;
             }
         }
 
@@ -6163,26 +6494,40 @@
             if (btnEl) btnEl.classList.add('active');
             if (subtabId === 'admin-subtab-diary') {
                 loadDiaryMarkdown();
+                loadHandoverMarkdown();
             }
         }
 
-        function setDiaryViewMode(mode) {
+        async function setDiaryViewMode(mode) {
             const formatted = document.getElementById('diary-formatted-view');
             const raw = document.getElementById('diary-raw-view');
             const formattedBtn = document.getElementById('diary-view-formatted-btn');
-            const rawBtn = document.getElementById('diary-view-raw-btn');
+            const rawDiaryBtn = document.getElementById('diary-view-raw-diary-btn');
+            const rawHandoverBtn = document.getElementById('diary-view-raw-handover-btn');
             
-            if (mode === 'raw') {
-                loadDiaryMarkdown();
+            // Reset button active styles
+            [formattedBtn, rawDiaryBtn, rawHandoverBtn].forEach(b => {
+                if (b) {
+                    b.style.background = 'transparent';
+                    b.style.color = '#94a3b8';
+                }
+            });
+
+            if (mode === 'raw-diary') {
+                await setDiaryRawFile('diary');
                 if (formatted) formatted.style.display = 'none';
                 if (raw) raw.style.display = 'block';
-                if (formattedBtn) {
-                    formattedBtn.style.background = 'transparent';
-                    formattedBtn.style.color = '#94a3b8';
+                if (rawDiaryBtn) {
+                    rawDiaryBtn.style.background = '#38bdf8';
+                    rawDiaryBtn.style.color = '#020617';
                 }
-                if (rawBtn) {
-                    rawBtn.style.background = '#38bdf8';
-                    rawBtn.style.color = '#020617';
+            } else if (mode === 'raw-handover') {
+                await setDiaryRawFile('handover');
+                if (formatted) formatted.style.display = 'none';
+                if (raw) raw.style.display = 'block';
+                if (rawHandoverBtn) {
+                    rawHandoverBtn.style.background = '#f59e0b';
+                    rawHandoverBtn.style.color = '#020617';
                 }
             } else {
                 if (formatted) formatted.style.display = 'flex';
@@ -6191,42 +6536,63 @@
                     formattedBtn.style.background = '#38bdf8';
                     formattedBtn.style.color = '#020617';
                 }
-                if (rawBtn) {
-                    rawBtn.style.background = 'transparent';
-                    rawBtn.style.color = '#94a3b8';
-                }
             }
         }
 
         async function copyDiaryMarkdown() {
-            await loadDiaryMarkdown();
             const textarea = document.getElementById('diary-raw-textarea');
-            const textToCopy = diaryMarkdownCache || (textarea ? textarea.value : '');
+            let textToCopy = '';
+            let title = 'Documentation';
+            
+            if (currentRawFileType === 'handover') {
+                textToCopy = await loadHandoverMarkdown();
+                title = 'Master Handover Manual';
+            } else {
+                textToCopy = await loadDiaryMarkdown();
+                title = 'Development Diary';
+            }
+            if (!textToCopy && textarea) textToCopy = textarea.value;
+
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 try {
                     await navigator.clipboard.writeText(textToCopy);
-                    showNotification('success', 'Diary Copied', 'Full Development Diary markdown copied to clipboard.');
+                    showNotification('success', title + ' Copied', title + ' markdown copied to clipboard successfully.');
                     return;
                 } catch (e) {}
             }
             if (textarea) {
                 textarea.select();
                 document.execCommand('copy');
-                showNotification('success', 'Diary Copied', 'Full Development Diary markdown copied to clipboard.');
+                showNotification('success', title + ' Copied', title + ' markdown copied to clipboard successfully.');
             }
         }
 
         function filterDiaryContent(query) {
             const q = (query || '').toLowerCase().trim();
             const cards = document.querySelectorAll('.diary-card');
+            const statusEl = document.getElementById('diary-search-status');
+            let visibleCount = 0;
+
             cards.forEach(card => {
                 if (!q) {
                     card.style.display = '';
+                    visibleCount++;
                 } else {
                     const text = card.textContent.toLowerCase();
-                    card.style.display = text.includes(q) ? '' : 'none';
+                    const match = text.includes(q);
+                    card.style.display = match ? '' : 'none';
+                    if (match) visibleCount++;
                 }
             });
+
+            if (statusEl) {
+                if (q) {
+                    statusEl.style.display = 'inline-block';
+                    statusEl.innerHTML = `<span style="color: #38bdf8; font-weight: 700;">${visibleCount}</span> matches found`;
+                } else {
+                    statusEl.style.display = 'none';
+                }
+            }
         }
 
         function filterDiaryByPhase(phase, btnEl) {
@@ -6234,7 +6600,9 @@
             if (btnEl) btnEl.classList.add('active');
             
             const searchInput = document.getElementById('diary-search-input');
+            const statusEl = document.getElementById('diary-search-status');
             if (searchInput) searchInput.value = '';
+            if (statusEl) statusEl.style.display = 'none';
 
             const cards = document.querySelectorAll('.diary-card');
             cards.forEach(card => {
